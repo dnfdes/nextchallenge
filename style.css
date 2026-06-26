@@ -1,0 +1,1144 @@
+/* 기본 세팅 */
+:root {
+    /* 💡 여기서 24px 숫자 하나만 바꾸면 사이트 전체의 둥글기가 한 번에 바뀝니다! */
+    --main-radius: 30px; 
+}
+
+body {
+    font-family: 'Pretendard', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* 다른 페이지들과 칼같이 일치시킨 1440px 중앙 정렬 컨테이너 */
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* 다른 페이지와 100% 똑같이 맞춘 흰색 반투명 고정 상단바 */
+.header-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    /* 💡 기존 background-color를 투명(transparent)으로 바꿉니다! */
+    background-color: transparent; 
+    box-sizing: border-box;
+    z-index: 1000;
+    /* transition을 background-color뿐만 아니라 all로 줘서 그림자까지 부드럽게 생기도록 합니다 */
+    transition: all 0.3s ease; 
+}
+
+/* 스크롤을 일정 이상 내렸을 때 (흰색 반투명 + 은은한 그림자) */
+.header-nav.scrolled {
+    background-color: rgba(255, 255, 255, 0.9); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+}
+
+
+.logo-box img {
+    display: block;
+    height: 45px; 
+    width: auto;
+}
+
+.menu-list {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+/* 1. 메뉴 공통 기본 세팅 (투명 배경일 때) */
+.header-nav .menu-list a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+    color: rgba(255, 255, 255, 0.75); /* 미선택: 반투명 흰색 */
+}
+
+.portfolio-page-body .header-nav .menu-list a {
+    color: #999999; /* 포트폴리오 페이지 맨 위(투명상태)일 때 글자색 */
+}
+
+/* 💡 포트폴리오 페이지에서 마우스 올렸을 때 */
+.portfolio-page-body .header-nav .menu-list a:hover {
+    color: #000000;
+
+}
+/* 2. 투명 배경에서 마우스 올렸을 때 */
+.header-nav .menu-list a:hover {
+    color: #000000; /* 쨍한 흰색 */
+}
+
+/* 3. 스크롤 내렸을 때 (흰색 배경) */
+.header-nav.scrolled .menu-list a {
+    color: #999999; /* 미선택: 연한 회색 */
+}
+
+/* 4. 스크롤 내린 상태에서 마우스 올렸을 때 */
+.header-nav.scrolled .menu-list a:hover {
+    color: #000000; /* 검은색 */
+}
+
+/* 5. 현재 위치한 페이지(.active)는 상태 상관없이 항상 검은색 */
+.header-nav .menu-list a.active {
+    color: #000000; 
+}
+
+/* 3) 💡 현재 내가 보고 있는 페이지 메뉴 (강조할 검은색) */
+.menu-list a.active {
+    color: #000000;
+    font-weight: 800; /* 눈에 더 잘 띄게 글자 두께를 더 두껍게 만듭니다 */
+}
+
+/* =========================================
+   1. 히어로 그라데이션 영역
+========================================= */
+.hero-gradient {
+    position: relative;
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+        min-height: 1200px;
+}
+
+.hero-gradient::after {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 350px;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,1)
+    );
+
+    pointer-events: none;
+    z-index: 999;
+}
+
+    .front-content-group {
+    position: absolute;
+    left: -100px;
+    top: -60px;
+    z-index: 1;
+    
+}
+
+.bg-img-back {
+    display: block;
+    
+}
+
+.hero-copy {
+    position: absolute;
+    right: 8%;
+    top: 28%;
+    z-index: 20;
+
+    color: #ffffff;
+}
+
+.hero-copy-title {
+    margin: 0;
+
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.hero-copy-body p {
+    margin: 0;
+
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+
+@media (max-width: 1024px) {
+    .bg-img-front {
+        margin-left: 25px; /* 창이 작아질 때 의도하신 여백 대응 */
+        max-width: calc(100% - 80px); 
+    }
+}
+
+
+
+.hero-gradient .hero-right-wrapper {
+    position: absolute;
+    top: 44%;
+    right: 7.5%;
+}
+
+
+.hero-right-wrapper {
+    position: absolute;
+    top: 44%;
+    right: 7.5%;
+    z-index: 100;
+}
+
+@media (max-width: 1440px) {
+    .hero-right-wrapper {
+        right: 40px;    
+    }
+}
+
+/* 💡 나타날 때 (스크롤 내릴 때) */
+.hero-right-wrapper.scrolled-fixed {
+    position: fixed;    
+    bottom: 60px;    
+    right: 40px;
+    top: auto;     
+    animation: fadeAndMoveIn 0.5s ease forwards;
+}
+
+/* 💡 사라질 때 (스크롤 올릴 때) */
+.hero-right-wrapper.scrolled-out {
+    position: absolute; /* 사라지는 동안에도 화면에 따라다니게 고정 */   
+    top: 44%;
+
+    animation: fadeAndMoveOut 0.1s ease forwards; /* 사라질 땐 0.3초로 약간 더 빠르게! */
+}
+
+/* 나타나는 애니메이션 (아래에서 위로) */
+@keyframes fadeAndMoveIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+
+/* 사라지는 애니메이션 (위에서 아래로) */
+@keyframes fadeAndMoveOut {
+    from {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px); 
+    }
+}
+
+.contact-pill-btn {
+    background-color: #929daa;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 16px 40px;
+    border-radius: var(--main-radius); 
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.contact-pill-btn:hover {
+    transform: translateY(-3px);
+}
+.hero-right-wrapper:not(.scrolled-fixed) .contact-pill-btn {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+
+/* =========================================
+   메인 로고 밑 설명 텍스트 디자인
+========================================= */
+/* 💡 포지션을 해제하고 로고 바로 밑에 자연스럽게 붙도록 유연하게 수정 */
+.hero-logo-desc {
+    margin-top: -40px;     /* 💡 로고 바로 밑바닥과의 고정 간격 (원하는 만큼 수치 조절 가능) */
+    margin-left: 40px;    /* 기존 디자인 값 left: 40px 유지 */
+    color: #000000;
+    pointer-events: auto;
+}
+
+/* 굵은 글씨 스타일 */
+.desc-bold {
+    font-size: clamp(14px, 1.2vw, 26px);
+    font-weight: 800; 
+    margin: 0 0 8px 0; 
+    letter-spacing: -0.3px;
+}
+
+/* 조그만 일반 글씨 3줄 그룹 */
+.desc-light-group p {
+    font-size: clamp(11px, 1.1vw, 21px);
+    font-weight: 400; 
+    line-height: 1.1; 
+    margin: 0;        
+    color: #222222;   
+}
+
+/* 얇은 글씨 3줄 그룹 스타일 */
+.intro-desc-group p {
+    font-size: clamp(15px, 1.1vw, 20px);
+    font-weight: 300; 
+    line-height: 1.2; 
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9); 
+}
+
+.intro-desc-group p:nth-child(2) {
+    margin-bottom: 24px; 
+}
+
+/* 2. 핵심 카피 박스 (중앙 관통, 직각 사각형, 좌측 정렬) */
+.intro-box-section {
+    padding: 60px 0 100px;
+    background-color: #ffffff;
+}
+
+/* 카피 박스 전체 통 기본 정렬 */
+.intro-box {
+    background-color: #A2AEBC;
+    color: #ffffff;
+    border-radius: 0px;
+    padding: 80px 60px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 32px; /* 💡 굵은 글씨와 얇은 글씨 그룹 사이의 간격 */
+}
+
+/* 굵은 글씨 1줄 스타일 */
+.intro-title {
+    font-size: clamp(22px, 2vw, 36px); /* 기존 크기보다 조금 더 시원하게 키움 */
+    font-weight: 800; /* 아주 굵게 */
+    margin: 0;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+}
+
+
+/* 공통: 섹션 타이틀 + 가로 직선 + 우측 링크 구조 */
+.section-block {
+    padding: 120px 0;
+    background-color: #ffffff;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 50px;
+    font-weight: 800;
+    margin: 0 30px 0 0;
+    white-space: nowrap; 
+}
+
+.line-container {
+    flex-grow: 1; 
+    position: relative;
+    height: 30px; 
+}
+
+.horizontal-line {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000000;
+}
+
+.view-all-link {
+    position: absolute;
+    right: 0;
+    bottom: 8px; 
+    font-size: 17px;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+}
+
+/* 3. Feature 섹션 (세로로 긴 박스, 타페이지 간격 통일) */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+}
+
+.feature-box {
+    background-color: #f0f0f0;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--main-radius);
+    display: flex;
+    justify-content: flex-start; 
+    align-items: flex-end; 
+    padding-bottom: 30px; 
+    /* 💡 왼쪽 벽에 너무 딱 붙지 않게 여백 추가 (원하는 수치로 조절하세요) */
+    padding-left: 30px; 
+    box-sizing: border-box;
+    position: relative; /* 자식(이미지)을 가두는 틀 */
+    overflow: hidden;   /* 💡 이미지가 박스 밖으로 튀어나가는 것 방지 */
+}
+
+.feature-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* 💡 이미지를 박스 비율에 맞춰 꽉 채우고 중앙 정렬 */
+    z-index: 0;
+}
+
+.feature-pill {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: clamp(14px, 1.1vw, 20px);
+    font-weight: bold;
+    padding: 10px 24px;
+    border-radius: var(--main-radius);
+    width: fit-content; 
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* 4. Growth 섹션 (박스 안 상단 글자, 우하단 검정 텍스트) */
+.growth-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+}
+
+.growth-box {
+    background-color: #f0f0f0;
+    aspect-ratio: 1 / 1; 
+    border-radius: var(--main-radius);
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative; /* 자식(이미지)을 가두는 틀 */
+    overflow: hidden;   /* 💡 이미지가 박스 밖으로 튀어나가는 것 방지 */
+}
+
+.growth-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* 💡 이미지를 박스 비율에 맞춰 꽉 채우고 중앙 정렬 */
+    z-index: 0;
+    filter: brightness(0.9);
+}
+
+.growth-small-text {
+    font-size: 30px;
+    color: #ffffff;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+.growth-large-text {
+    font-size: 70px;
+    color: #ffffff;
+    font-weight: 800;
+    margin: 0;
+}
+
+.growth-bottom-text {
+    text-align: right;
+    font-size: 17px;
+    color: #000000;
+    margin-top: 60px;
+    font-weight: 500;
+}
+
+.feature-pill, .growth-small-text, .growth-large-text {
+    position: relative;
+    z-index: 10;
+}
+
+/* 5. Partners 섹션 (상자 없이 꽉 차는 이미지) */
+.partners-img {
+    width: 60%;
+
+    height: auto;
+    display: block;      /* 이미지를 독립된 상자로 취급하게 만듭니다 */
+    margin: 0 auto;      /* 왼쪽, 오른쪽 빈 공간을 똑같이 나눠 가져서 무조건 중앙에 오게 합니다 */
+    border-radius: var(--main-radius);
+}
+
+/* 6. site-footer (최종 승인 하단바) */
+.site-footer {
+    border-top: 1px solid #A2AEBC; 
+    width: 100%;
+    margin-top: 100px;
+}
+
+.footer-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 💡 flex-start에서 center로 변경! */
+}
+
+/* 💡 사진이 왼쪽으로 갔으니 left로 수정 */
+.footer-left img {
+    display: block;
+    height: 70px;
+}
+
+/* 💡 글씨가 오른쪽으로 갔으니 right로 수정 및 우측 정렬 추가 */
+.footer-right {
+    text-align: right; /* 글자 우측 정렬 */
+}
+
+.footer-right p {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: #333333;
+    line-height: 0.9;
+}
+
+.footer-right p:nth-child(1) { font-weight: bold; }
+.footer-right p:nth-child(3) { margin-bottom: 24px; }
+
+
+.reveal-item {
+    opacity: 0; /* 처음엔 숨김 */
+    /* transform 지우세요! (우측 밀림 방지) */
+    /* transition 넣지 마세요! */
+}
+
+/* 히어로 섹션 */
+.hero-reveal {
+    opacity: 0; /* 접속하자마자 안 보이게 대기 */
+    /* 🚨 범인 제거: transition: all 1s... 무조건 지우세요! GSAP랑 싸웁니다. */
+}
+
+
+/* =========================================
+   Portfolio 페이지 전용 스타일
+========================================= */
+/* 타이틀 */
+.page-title {
+    font-size: 72px;
+    font-weight: 800;
+    margin: 0px 0 40px 0;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+/* 연도별 섹션 */
+.year-section {
+    margin-bottom: 80px; 
+}
+
+.year-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0px 0 30px 0;
+    border-top: 2px solid #000; 
+    padding-top: 27px;
+}
+
+/* 포트폴리오 3열 그리드 */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px 30px; 
+}
+
+.portfolio-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; 
+}
+
+.portfolio-card .project-name {
+    text-align: left;
+    padding-left: 6px; /* 왼쪽에서 6px 띄움 */
+}
+
+/* 💡 1. 회색 칸 (정방형 1:1 비율로 수정 완료!) */
+.image-placeholder {
+    background-color: #f0f0f0;
+    aspect-ratio: 1 / 1; /* 4/3에서 1/1(정방형)로 수정되었습니다 */
+    border-radius: var(--main-radius);  
+    position: relative;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+}
+
+/* 2. 마우스 올리면 나오는 상세정보 칸 */
+.hover-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+/* 마우스를 올렸을 때 (Hover) */
+.image-placeholder:hover .hover-info {
+    opacity: 1; 
+}
+
+/* 3. 사진 바로 밑 프로젝트 이름 */
+.project-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    text-align: left; 
+}
+
+/* =========================================
+   포트폴리오 페이지 전용 여백 (상단바 가림 방지)
+========================================= */
+.portfolio-main {
+    padding-top: 120px;   /* 💡 상단바 두께만큼 본문을 아래로 밀어줍니다 */
+    padding-bottom: 100px; /* 푸터와의 간격 */
+}
+
+/* 포트폴리오 페이지 전용 대각선 그라데이션 배경 */
+.portfolio-page-body {
+    /* 💡 135deg가 대각선(좌측상단 -> 우측하단) 방향을 뜻합니다 */
+    background: linear-gradient(315deg, #f4f6f9 80%, #A2AEBC 100%);
+    background-attachment: fixed; /* 스크롤 내려도 배경은 고정되게 해서 고급스러운 느낌 추가 */
+}
+
+.portfolio-main .year-title {
+    margin-top: 120px; /* 💡 숫자를 조절해서 선과의 간격을 맞춥니다 */
+}   
+
+/* =========================================
+   [WORK 메인 페이지 전용 스타일]
+========================================= */
+/* Work 메인용 위아래 여백 (상단바 가림 방지) */
+.work-main {
+    padding-top: 140px;
+    padding-bottom: 100px;
+}
+
+/* 3열 그리드 및 링크 뼈대 */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px; 
+}
+
+.work-card-link {
+    text-decoration: none; 
+    display: block; 
+}
+
+/* 💡 Portfolio의 정방형(1:1)과 충돌하지 않게 Work 메인만 3:4 비율로 예외 처리! */
+.work-card-link .image-placeholder {
+    aspect-ratio: 3 / 4; 
+    position: relative; /* 자식 요소(이미지)를 이 박스 안에 가두는 기준 */
+    overflow: hidden;   /* [핵심] 박스 밖으로 튀어나가는 건 무조건 잘라버림 */
+    display: block;
+}
+
+/* 네모 안 텍스트 정보 (좌측 상단 & 우측 하단) */
+.category-info {
+    position: absolute; top: 40px; left: 30px; z-index: 10; color: #FFFFFF; 
+}
+.category-name {
+    font-size: 50px; font-weight: 800; margin: 0; line-height: 1.0;
+}
+.right-info {
+    position: absolute; bottom: 40px; right: 30px; z-index: 10;
+    color: #FFFFFF; font-size: 20px; font-weight: bold; text-align: right; line-height: 1.3;
+}
+
+.hover-overlay {
+    display: none !important; 
+}
+
+/* 2. 링크 태그를 하나의 온전한 박스로 만들고, 위로 올라가는 애니메이션 준비 */
+.work-card-link {
+    display: block; /* 💡 a 태그 전체가 부드럽게 움직일 수 있도록 박스 처리 */
+    transition: transform 0.3s ease; /* 0.3초 동안 스무스하게 움직임 */
+    text-decoration: none;
+}
+
+/* 3. 마우스를 올렸을 때 위로 스윽 올라가는 모션 (컨택트 버튼과 동일한 효과) */
+.work-card-link:hover {
+    transform: translateY(-10px); /* 위로 10px 올라감 (원하시면 숫자를 조절하세요) */
+}
+
+
+/* =========================================
+   [WORK 상세 페이지 3종 공통 스타일] (Event, Popup 등)
+========================================= */
+/* 상단 타이틀 히어로 영역 */
+
+.hero-banner {
+    background: linear-gradient(to bottom, #A2AEBC 70%, #ffffff 100%);
+    padding: 120px 0 250px 0; /* 상단바 공간 확보 및 아래 여백 */
+    text-align: center;      /* 💡 내부 요소 전체 중앙 정렬 */
+}
+
+.banner-container {
+    width: 100%; 
+    max-width: 1440px; 
+    margin: 0 auto; 
+    padding: 0 40px; 
+    box-sizing: border-box;
+}
+
+/* 💡 WORK 타이틀 글씨 스타일 */
+.hero-banner .page-title {
+    color: #ffffff;                 /* 💡 글씨 색상 흰색 */
+    font-size: 72px; /* 💡 크기를 시원하고 크게 확대 (반응형 적용) */
+    font-weight: 800;               /* 두껍게 */
+    letter-spacing: -1px;           /* 자간 살짝 축소 */
+    margin: 0;
+    text-transform: uppercase;      /* 대문자 고정 */
+}
+
+/* 본문 영역 마진 조정 (그라데이션과 카드 사이가 자연스럽게 이어지도록 여백 리셋) */
+.work-main {
+    margin-top: -250px; /* 💡 상단바 밑으로 콘텐츠가 시원하게 내려오도록 설정 */
+    padding-bottom: 100px;
+}
+
+
+.banner-container {
+    width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 40px; box-sizing: border-box;
+}
+
+/* 카테고리 타이틀 및 알약 버튼 */
+.category-title {
+    font-size: 48px; font-weight: 800; color: #ffffff; margin: 0 0 52px 0; letter-spacing: -1px;
+}
+.category-buttons {
+    display: flex; justify-content: center; gap: 16px; list-style: none; margin: 0; padding: 0;
+}
+.category-buttons a {
+    text-decoration: none; font-size: 14px; font-weight: bold; padding: 12px 24px; border-radius: 30px; transition: all 0.3s ease;
+}
+.btn-active {
+    background-color: #ffffff; color: #000000; border: 2px solid #ffffff;
+}
+.btn-inactive {
+    background-color: transparent; color: #ffffff; border: 2px solid #ffffff;
+}
+.btn-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 하단 프로젝트 리스트 영역 */
+.content-container {
+    width: 100%; max-width: 1440px; margin: -225px auto 0; padding: 40px 40px 100px; box-sizing: border-box; 
+}
+.project-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px 30px; 
+}
+.project-card {
+    display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: #000000;
+}
+.project-card:hover .image-placeholder {
+    background-color: #e5e5e5;
+    position: relative; /* 자식 요소(이미지)를 이 박스 안에 가두는 기준 */
+    overflow: hidden;   /* [핵심] 박스 밖으로 튀어나가는 건 무조건 잘라버림 */
+    display: block;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* 숫자 키우면 더 벌어짐 */
+    padding-left: 12px;
+}
+.project-date {
+    font-size: 14px; color: #666666; margin: 0;
+
+}
+
+.image-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.project-card:hover .image-placeholder {
+    background-color: #e5e5e5;
+}
+
+
+/* =======================================
+   디자인 카테고리 전용 특수 레이아웃 (완전 해결본)
+   ======================================= */
+.design-special-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 24px; 
+}
+
+/* 1. 카드를 Flex로 만들어 빈 공간을 영리하게 채우도록 세팅 */
+.design-special-grid .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    min-height: 0; /* 🚨 그리드 폭주 1차 차단 */
+}
+
+/* 2. 가로/세로 자리 차지 규칙 */
+.horizontal-wide { grid-column: span 2; }
+.vertical-long { grid-row: span 2; }
+
+/* 3. 낱개 상자 & 합쳐진 상자 완벽한 비율 맞춤 (수학적 계산) */
+.design-special-grid .image-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 낱개 상자: 1:1 정방형 */
+    border-radius: var(--main-radius);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.design-special-grid .image-placeholder-special {
+    position: relative;
+    width: 100%;
+    height: 0; 
+    /* 💡 가로 2칸 너비에서 간격(24px)을 빼고 반으로 나눔 = 정확히 낱개 상자 1개 높이! */
+    padding-top: calc((100% - 24px) / 2); 
+    border-radius: var(--main-radius);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* 4. 안쪽 이미지 핏 (비율에 맞춰 꽉 차게) */
+.design-special-grid .work-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+/* 스크롤바 디자인 */
+.scroll-box-container::-webkit-scrollbar { width: 6px; }
+.scroll-box-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* 5. 안쪽 이미지들 설정 */
+.scroll-long-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.design-special-grid .work-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 사진 비율 찌그러짐 방지 */
+    display: block;
+}
+
+/* 1. 맨 왼쪽 세로 긴 상자 (그리드 팽창 원천 차단) */
+.design-special-grid .vertical-long {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    min-height: 0 !important; /* 🚨 핵심: 긴 사진 높이 무시하고 그리드 껍데기에 맞춤 */
+    height: 100%;
+}
+
+/* 2. 스크롤 껍데기 영역 (사진 위에 스크롤 얹기 & 모서리 튀어나옴 방지) */
+.design-special-grid .scroll-box-container {
+    flex: 1 1 0px !important; 
+    min-height: 0 !important; 
+    width: 100%;
+    overflow-y: auto !important;
+    overflow-y: overlay !important; /* 💡 사진을 밀어내지 않고 위에 스크롤이 얹어짐 */
+    overflow-x: hidden;
+    border-radius: var(--main-radius);
+    background-color: transparent !important; /* 💡 스크롤 트랙 배경을 투명하게 */
+    webkit-mask-image: -webkit-radial-gradient(white, black); /* 💡 둥근 모서리 밖으로 스크롤 삐져나옴 완벽 절단 */
+}
+
+/* 3. 안쪽 긴 사진 */
+.design-special-grid .scroll-long-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 스크롤바 디자인 (여백을 주어 벽에 닿지 않게) */
+.design-special-grid .scroll-box-container::-webkit-scrollbar { 
+    width: 8px; /* 두께 살짝 조정 */
+}
+.design-special-grid .scroll-box-container::-webkit-scrollbar-track {
+    background: transparent !important; /* 길(트랙) 완전 투명화 */
+}
+.design-special-grid .scroll-box-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    border: 2px solid transparent; /* 💡 상자 벽 및 위아래 모서리에 닿지 않도록 투명 여백 생성 */
+    background-clip: padding-box;
+}
+
+/* =========================================
+   CONTACT FORM 전용 스타일
+========================================= */
+
+
+/* Contact 페이지 본문 전용 여백 설정 */
+.contact-main {
+    padding-top: 125px;    /* 상단바 밑으로 콘텐츠가 시원하게 내려오도록 설정 */
+    padding-bottom: 50px; /* 하단 푸터와의 간격을 넉넉하게 설정 */
+}
+
+.contact-main .page-title {
+    text-align: left;
+    margin-bottom: 5px;
+    color: #ffffff;
+    margin-left: -5px;
+}
+
+.contact-line {
+    width: 100%;
+    height: 1px;
+    background-color: #ffffff;
+    margin: 55px 50px 40px 0;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+#name {
+    width: 600px;
+}
+
+#tel {
+    width: 400px;
+}
+
+#email {
+    width: 600px;
+}
+
+#details {
+    width: 100%;
+    min-height: 50px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-group label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 18px;
+    border: 1px solid #d9d9d9;
+    border-radius: var(--main-radius);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+}
+
+.form-group textarea {
+    min-height: 220px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #A2AEBC;
+}
+
+.contact-form button {
+    width: fit-content;
+    align-self: flex-start;
+
+    padding: 16px 40px;
+
+    border: none;
+    border-radius: var(--main-radius);
+
+    background-color: #ffffff;
+    color: #000000;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.contact-page {
+    background-color: #757e88;
+}
+
+/* Contact 페이지 전용 푸터 색상 반전 (사진이 왼쪽, 글씨가 오른쪽) */
+.contact-page .footer-left img {
+    filter: brightness(0) invert(1); /* 💡 왼쪽으로 간 사진(로고) 하얗게 반전 */
+}
+
+.contact-page .footer-right p {
+    color: #ffffff; /* 💡 오른쪽으로 간 글씨 하얗게 변경 */
+}
+.contact-desc {
+    font-size: 18px;
+    font-weight: 500; /* medium */
+    margin: 0 0 24px 0;
+    color: #ffffff;
+}
+
+.contact-form-wrapper .form-group {
+    margin-top: 24px; /* 💡 윗 물체와의 전체 간격 */
+}
+
+.contact-form-wrapper label {
+    display: block;
+    margin-bottom: -2px; /* 💡 글자와 바로 밑 입력칸(input) 사이의 간격 */
+}
+
+
+.details-note {
+    color: rgba(255,255,255,0.8);
+}
+
+.contact-page {
+    background: #5f6879;
+}
+
+.contact-main {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-page {
+    background: #5f6879;
+    overflow-x: hidden;
+}
+
+.contact-bg-image {
+    position: absolute;
+    right: 100px;
+    top: -48px;
+
+    width: 1200px;
+
+    opacity: 0.2;
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+.form-error {
+    display: none;
+    margin-bottom: 24px;
+    color: #ff5656;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-error.show {
+    display: block;
+}
+
+.contact-form button.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.form-success {
+    display: none;
+    margin-top: 16px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-success.show {
+    display: block;
+}
+
+/* 서브 페이지 전용 컨택트 버튼 고정 틀 */
+.sub-contact-wrapper {
+    position: fixed;    
+    bottom: 60px; /* 메인 페이지 고정 위치인 60px와 통일 */   
+    right: 40px;  /* 메인 페이지 고정 위치와 통일 */
+    z-index: 9999;      
+    /* 💡 transform이나 animation을 다 빼버려서 충돌 요소를 원천 차단합니다 */
+}
