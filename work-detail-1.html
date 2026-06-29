@@ -14,19 +14,32 @@
 </head>
 <body>
 
-    <header class="header-nav">
+<header class="header-nav at-top" id="main-nav">
+        <button class="mobile-menu-btn" aria-label="메뉴 열기">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <div class="logo-box">
             <a href="index.html">
-                <img src="images/logo.svg" alt="Next Challenge Logo" style="height: 45px;">
+                <img src="images/logo.svg" alt="Next Challenge Logo">
             </a>
         </div>
+        
         <nav class="menu-box">
-            <ul class="menu-list">
-                <li><a href="index.html">ABOUT</a></li>
-                <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="work.html" class="active">WORK</a></li> 
-                <li><a href="contact.html">CONTACT</a></li>
-            </ul>
+            <div class="mobile-close-zone">
+                <button class="menu-close-btn" aria-label="메뉴 닫기">&times;</button>
+            </div>
+
+            <div class="menu-content-panel">
+                <ul class="menu-list">
+                    <li><a href="index.html" >ABOUT</a></li>
+                    <li><a href="portfolio.html">PORTFOLIO</a></li>
+                    <li><a href="work.html" class="active" >WORK</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
@@ -267,6 +280,43 @@ window.addEventListener("load", () => {
         }
     });
 </script>
+
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const mobileBtn = document.querySelector(".mobile-menu-btn");
+            const closeBtn = document.querySelector(".menu-close-btn");
+            const closeZone = document.querySelector(".mobile-close-zone");
+            const menuBox = document.querySelector(".menu-box");
+
+            // 1) 메뉴 열기 (브라우저 주소에 가상의 #menu를 추가함)
+            if (mobileBtn && menuBox) {
+                mobileBtn.addEventListener("click", () => {
+                    menuBox.classList.add("active");
+                    history.pushState({ menuOpen: true }, "", "#menu");
+                });
+            }
+
+            // 2) 메뉴 닫기 함수 (X버튼이나 빈 공간 누를 때)
+            const closeMenu = () => {
+                if(menuBox && menuBox.classList.contains("active")) {
+                    menuBox.classList.remove("active");
+                    if(window.location.hash === "#menu") {
+                        history.back(); // 주소창 원상복구
+                    }
+                }
+            };
+
+            if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+            if (closeZone) closeZone.addEventListener("click", closeMenu);
+
+            // 3) 💡 휴대폰 '뒤로 가기' 버튼을 눌렀을 때 감지하여 창 닫기
+            window.addEventListener("popstate", (e) => {
+                if (menuBox && menuBox.classList.contains("active")) {
+                    menuBox.classList.remove("active");
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

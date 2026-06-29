@@ -12,6 +12,8 @@ body {
     color: #000000;
 }
 
+
+
 /* 다른 페이지들과 칼같이 일치시킨 1440px 중앙 정렬 컨테이너 */
 .container {
     width: 100%;
@@ -70,6 +72,11 @@ body {
 
 .portfolio-page-body .header-nav .menu-list a {
     color: #999999; /* 포트폴리오 페이지 맨 위(투명상태)일 때 글자색 */
+}
+
+.portfolio-page-body main,
+.portfolio-page-body .container {
+    padding-top: 120px !important; /* 💡 상단바 높이(약 85px) + 의도하신 여백 공간 */
 }
 
 /* 💡 포트폴리오 페이지에서 마우스 올렸을 때 */
@@ -1045,6 +1052,11 @@ body {
     opacity: 0.9;
 }
 
+.contact-page main,
+.contact-main {
+    padding-top: 120px !important; /* 💡 상단바 높이 + 의도하신 여백 공간 */
+}
+
 .contact-page {
     background-color: #758188;
 }
@@ -1090,6 +1102,11 @@ body {
 .contact-page {
     background: #5f6879;
     overflow-x: hidden;
+}
+
+/* Contact 페이지 상단바 로고를 강제로 하얗게 반전시키는 코드 */
+.contact-page .header-nav .logo-box img {
+    filter: invert(1) brightness(100) !important;
 }
 
 .contact-bg-image {
@@ -1144,64 +1161,165 @@ body {
 }
 
 /* =========================================
-   2. 노트북 & 작은 모니터 대응 (1200px 이하)
+   [반응형 최적화] 노트북 & 모바일 통합 구역
 ========================================= */
+
+/* 1. 데스크톱 우선 공통 제어 (768px 이상에서 모바일 요소 숨김) */
+@media (min-width: 769px) {
+    .mobile-menu-btn, .mobile-close-zone, .menu-close-btn { 
+        display: none !important; 
+    }
+}
+
+/* 2. 노트북 & 작은 모니터 대응 (1200px 이하) */
 @media (max-width: 1200px) {
     .container, .hero-content-container, .footer-container {
-        padding: 0 30px; /* 전체적인 좌우 여백을 살짝 줄임 */
+        padding: 0 30px;
     }
     .hero-logo-desc {
-        margin-left: 50px; /* 글씨가 그래픽에 닿지 않도록 여백 조정 */
+        margin-left: 50px;
+    }
+}
+
+/* 3. 태블릿 & 스마트폰 통합 대응 (768px 이하 최종 정돈) */
+@media (max-width: 768px) {
+    /* [공통] 가로 여백 최적화 */
+    .container, .hero-content-container, .footer-container { 
+        padding: 0 20px; 
+    }
+
+    /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
+    .hero-content-container { 
+        flex-direction: column; 
+        justify-content: center; 
+        text-align: center; 
+        gap: 40px; 
+    }
+    .hero-logo-desc { 
+        margin-left: 0; 
+        text-align: center; 
+    }
+    .hero-bg-graphic { 
+        background-position: center center; 
+        background-size: cover; 
+        opacity: 0.4; 
+    }
+
+    /* [상단바 헤더] 구조 및 높이 고정 */
+    .header-nav { 
+        position: fixed; 
+        width: 100%; 
+        height: 75px; 
+        left: 0; 
+        top: 0; 
+        display: flex; 
+        align-items: center; 
+        padding: 0 20px; 
+        box-sizing: border-box; 
+        background-color: transparent;
+    }
+
+    /* 💡 [로고 정중앙 고정] 주변 요소 간섭 완전 차단 */
+    .header-nav .logo-box { 
+        position: absolute; 
+        left: 50%; 
+        top: 50%; 
+        transform: translate(-50%, -50%); 
+        margin: 0; 
+        padding: 0; 
+    }
+    .header-nav .logo-box img { 
+        height: 40px !important; /* 개별 html 인라인 style 높이 제압용 유지 */
+        width: auto; 
+    }
+
+    /* 햄버거 버튼 좌측 독립 배치 */
+    .mobile-menu-btn { 
+        display: block; 
+        position: absolute; 
+        left: 20px; 
+        top: 50%; 
+        transform: translateY(-50%); 
+        background: none; 
+        border: none; 
+        cursor: pointer; 
+        padding: 10px; 
+        z-index: 1001; 
+    }
+    .mobile-menu-btn span { display: block; width: 25px; height: 2px; background-color: #000000; margin: 5px 0; }
+    .contact-page .mobile-menu-btn span { background-color: #ffffff; }
+
+    /* 👉 [슬라이드 내비게이션 드로우] */
+    .menu-box {
+        position: fixed; top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: 2000;
+        background-color: rgba(0, 0, 0, 0);
+        pointer-events: none;
+        visibility: hidden;
+        transition: background-color 0.4s ease, visibility 0.4s;
+        display: block; 
+    }
+
+    /* 왼쪽에서 나오는 80% 흰색 패널 */
+    .menu-content-panel {
+        position: absolute; top: 0; left: 0;
+        width: 80%; height: 100%;
+        background-color: #ffffff;
+        padding: 100px 40px; box-sizing: border-box;
+        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* 우측 20% 투명 닫기 영역 */
+    .mobile-close-zone {
+        position: absolute; top: 0; right: 0;
+        width: 20%; height: 100%;
+        cursor: pointer;
+    }
+    .menu-close-btn {
+        position: absolute; top: 20px; left: 20px;
+        background: none; border: none; padding: 0;
+        font-size: 42px; color: #ffffff; cursor: pointer;
+        display: block;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    /* 모바일 카테고리 글씨 정렬 및 색상 고정 */
+    .menu-list { display: flex; flex-direction: column; align-items: flex-start; gap: 35px; padding: 0; margin: 0; list-style: none; }
+    .menu-list li { width: 100%; text-align: left; }
+    
+    .menu-box .menu-list li a { 
+        font-size: 24px; font-weight: 500; 
+        color: #999999 !important; /* 비선택 메뉴 연한 회색 강제 고정 */
+        text-decoration: none; display: block; width: 100%; 
+    }
+    .menu-box .menu-list li a.active { 
+        color: #000000 !important; /* 현재 머무는 페이지만 검은색 강제 고정 */
+        font-weight: 700; 
+    }
+
+    /* ✨ 오픈(Active) 효과 스위치 */
+    .menu-box.active {
+        visibility: visible;
+        background-color: rgba(0, 0, 0, 0.6);
+        pointer-events: auto;
+    }
+    .menu-box.active .menu-content-panel {
+        transform: translateX(0);
+    }
+    .menu-box.active .menu-close-btn {
+        opacity: 1;
     }
 }
 
 /* =========================================
-   3. 태블릿 & 스마트폰 통합 대응 (768px 이하) - 핵심 구간
+   [비율 반응형] 세로가 더 긴 화면일 때
 ========================================= */
-@media (max-width: 768px) {
-    /* [공통] 모바일 가로 여백 최적화 */
-    .container, .hero-content-container, .footer-container {
-        padding: 0 20px; 
-    }
-
-    /* 1) 상단바 모바일 정렬 */
-    .header-nav {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px 20px;
-    }
-    .menu-list {
-        gap: 20px;
-    }
-
-    /* 2) 히어로 영역 세로 1줄 정렬 및 배경 이동 */
-    .hero-content-container {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        gap: 40px; /* 글씨와 버튼 사이 간격 */
-    }
-    .hero-logo-desc {
-        margin-left: 0; /* 강제 여백 초기화 */
-        text-align: center;
-    }
-    .hero-bg-graphic {
-        /* 💡 이미지를 모바일 화면 정중앙으로 이동시켜 잘림 방지 */
-        background-position: center center !important; 
-        background-size: cover !important;
-        opacity: 0.4; /* 글씨 가독성을 위해 배경을 살짝 흐리게 방어 */
-    }
-
-    /* 3) 푸터 영역 세로 1줄 정렬 및 중앙 배치 */
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
-    .footer-right {
-        text-align: center; /* 💡 우측 정렬이었던 회사 정보를 중앙 정렬로 변경 */
-    }
-    .footer-right p:nth-child(3) {
-        margin-bottom: 10px; /* 모바일에서는 여백을 좁혀서 컴팩트하게 */
+@media (orientation: portrait) {
+    /* 💡 우측 Contact 버튼 구역을 아예 숨겨버립니다 */
+    .hero-right-wrapper {
+        display: none !important;
     }
 }
