@@ -1459,6 +1459,7 @@ min-height: clamp(100px, 110vw, 1300px);
         top: 0px;
         width: clamp(500px, 150vw, 1700px);
                 z-index: 2;
+                overflow-x: hidden
 
     }
 
