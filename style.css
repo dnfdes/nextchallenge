@@ -1,8 +1,14 @@
 /* 기본 세팅 */
 :root {
-    /* 💡 여기서 24px 숫자 하나만 바꾸면 사이트 전체의 둥글기가 한 번에 바뀝니다! */
-    --main-radius: 30px; 
+--main-radius: clamp(13px, 2.5vw, 30px); /* 곡률 반응형 */
+    --padding-side: clamp(20px, 4vw, 40px);  /* 좌우 여백 반응형 */
 }
+
+/* 💡 모든 텍스트 반응형 일괄 적용 */
+h1 { font-size: clamp(28px, 4vw, 50px); margin: 0; }
+h2 { font-size: clamp(20px, 3vw, 40px); margin: 0; }
+h3 { font-size: clamp(18px, 2vw, 32px); margin: 0; }
+p, a, li { font-size: clamp(16px, 1.5vw, 18px); line-height: 1.6; }
 
 body {
     font-family: 'Pretendard', sans-serif;
@@ -40,11 +46,14 @@ body {
     transition: all 0.3s ease; 
 }
 
+
+
 /* 스크롤을 일정 이상 내렸을 때 (흰색 반투명 + 은은한 그림자) */
 .header-nav.scrolled {
     background-color: rgba(255, 255, 255, 0.9); 
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
 }
+
 
 
 .logo-box img {
@@ -143,17 +152,26 @@ body {
     z-index: 999;
 }
 
-    .front-content-group {
+.front-content-group {
     position: absolute;
     left: -100px;
-    top: -60px;
+    top: clamp(-80px, -1.6vw, 100px);
     z-index: 1;
-    
+
+    width: clamp(
+        1700px,   /* portrait 직전 최소 */
+        130vw,   /* 화면이 줄면 자연스럽게 감소 */
+        2200px   /* 큰 모니터 최대 */
+    );
+
+    transform-origin: left top;
 }
+
 
 .bg-img-back {
     display: block;
-    
+    width: 100%;
+    height: auto;
 }
 
 .hero-copy {
@@ -162,8 +180,50 @@ body {
     top: 28%;
     z-index: 20;
 
-    color: #ffffff;
+
+ color: #fff;
 }
+
+@media (max-width: 1865px) {
+    .hero-copy {
+        display: none;
+    }
+}
+
+@media (max-width: 875px) {
+    .front-content-group {
+        top: 80px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .front-content-group {
+        left: -10%;
+        width: clamp(
+            500px,   /* C (최소) */
+            150vw,    /* 화면에 따라 다시 감소 */
+            1700px    /* B (최대) */
+        );
+    }
+
+        .hero-gradient {
+        min-height: clamp(
+            100px,   /* 최소 높이 */
+            110vw,   /* 화면이 줄수록 같이 감소 */
+            1300px   /* 최대(1150px 부근) */
+        );
+    }
+
+    .hero-gradient::after {
+    height: clamp(
+        100px,  /* 최소 */
+        35vw,   /* 화면이 줄면 같이 감소 */
+        500px   /* 최대 */
+    );
+}
+}
+
+
 
 .hero-copy-title {
     margin: 0;
@@ -258,7 +318,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     padding: 16px 40px;
-    border-radius: var(--main-radius); 
+    border-radius: 30px; 
     text-decoration: none;
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
@@ -304,7 +364,7 @@ body {
 
 /* 얇은 글씨 3줄 그룹 스타일 */
 .intro-desc-group p {
-    font-size: clamp(15px, 1.1vw, 20px);
+    font-size: clamp(12px, 1.1vw, 20px);
     font-weight: 300; 
     line-height: 1.2; 
     margin: 0;
@@ -326,11 +386,11 @@ body {
     background-color: #A2AEBC;
     color: #ffffff;
     border-radius: 0px;
-    padding: 80px 60px;
+    padding: clamp(40px, 6vw, 60px) clamp(40px, 4vw, 60px);
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 32px; /* 💡 굵은 글씨와 얇은 글씨 그룹 사이의 간격 */
+    gap: clamp(20px, 2vw, 32px);
 }
 
 /* 굵은 글씨 1줄 스타일 */
@@ -341,11 +401,11 @@ body {
     line-height: 1.3;
     letter-spacing: -0.5px;
 }
-
+ 
 
 /* 공통: 섹션 타이틀 + 가로 직선 + 우측 링크 구조 */
 .section-block {
-    padding: 120px 0;
+    padding: clamp(60px, 8vw, 100px) 10px;
     background-color: #ffffff;
 }
 
@@ -356,7 +416,7 @@ body {
 }
 
 .section-title {
-    font-size: 50px;
+    font-size: clamp(40px, 5.2vW, 50px);
     font-weight: 800;
     margin: 0 30px 0 0;
     white-space: nowrap; 
@@ -394,7 +454,7 @@ body {
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px 30px;
+    gap: clamp(16px, 2vw, 40px) clamp(12px, 1.5vw, 30px);
 }
 
 .feature-box {
@@ -402,11 +462,12 @@ body {
     aspect-ratio: 3 / 4;
     border-radius: var(--main-radius);
     display: flex;
-    justify-content: flex-start; 
+    justify-content: center;
     align-items: flex-end; 
-    padding-bottom: 30px; 
+
+    padding: 0 clamp(12px, 2vw, 30px) clamp(12px, 2vw, 30px);
+
     /* 💡 왼쪽 벽에 너무 딱 붙지 않게 여백 추가 (원하는 수치로 조절하세요) */
-    padding-left: 30px; 
     box-sizing: border-box;
     position: relative; /* 자식(이미지)을 가두는 틀 */
     overflow: hidden;   /* 💡 이미지가 박스 밖으로 튀어나가는 것 방지 */
@@ -425,10 +486,10 @@ body {
 .feature-pill {
     background-color: #ffffff;
     color: #000000;
-    font-size: clamp(14px, 1.1vw, 20px);
+    font-size: clamp(11px, 1.5vw, 20px);
     font-weight: bold;
-    padding: 10px 24px;
-    border-radius: var(--main-radius);
+    padding: clamp(6px, 0.8vw, 10px) clamp(12px, 2vw, 24px);
+    border-radius:30px;
     width: fit-content; 
     text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
@@ -438,7 +499,7 @@ body {
 .growth-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px 30px;
+    gap: clamp(16px, 2vw, 40px) clamp(12px, 1.5vw, 30px);
 }
 
 .growth-box {
@@ -466,7 +527,7 @@ body {
 }
 
 .growth-small-text {
-    font-size: 30px;
+    font-size: clamp(20px, 1.2vw, 30px);
     color: #ffffff;
     font-weight: 600;
     margin: 0 0 12px 0;
@@ -474,7 +535,7 @@ body {
 }
 
 .growth-large-text {
-    font-size: 70px;
+    font-size: clamp(50px, 6vw, 70px);
     color: #ffffff;
     font-weight: 800;
     margin: 0;
@@ -482,9 +543,9 @@ body {
 
 .growth-bottom-text {
     text-align: right;
-    font-size: 17px;
+    font-size: clamp(8px, 3vw, 17px);
     color: #000000;
-    margin-top: 60px;
+    margin-top: 30px;
     font-weight: 500;
 }
 
@@ -495,7 +556,7 @@ body {
 
 /* 5. Partners 섹션 (상자 없이 꽉 차는 이미지) */
 .partners-img {
-    width: 60%;
+    width: 80%;
 
     height: auto;
     display: block;      /* 이미지를 독립된 상자로 취급하게 만듭니다 */
@@ -524,7 +585,7 @@ body {
 /* 💡 사진이 왼쪽으로 갔으니 left로 수정 */
 .footer-left img {
     display: block;
-    height: 70px;
+    height: clamp(40px, 3vW, 70px);
 }
 
 /* 💡 글씨가 오른쪽으로 갔으니 right로 수정 및 우측 정렬 추가 */
@@ -534,7 +595,7 @@ body {
 
 .footer-right p {
     margin: 0 0 4px 0;
-    font-size: 14px;
+    font-size: clamp(11px, 1.5vW, 14px);
     color: #333333;
     line-height: 0.9;
 }
@@ -585,7 +646,7 @@ body {
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 50px 30px; 
+    gap: clamp(20px, 2.5vw, 50px) clamp(12px, 1.5vw, 30px);
 }
 
 .portfolio-card {
@@ -672,7 +733,7 @@ body {
 .work-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px; 
+    gap: clamp(16px, 2vw, 40px);
 }
 
 .work-card-link {
@@ -762,8 +823,10 @@ body {
     font-size: 48px; font-weight: 800; color: #ffffff; margin: 0 0 52px 0; letter-spacing: -1px;
 }
 .category-buttons {
-    display: flex; justify-content: center; gap: 16px; list-style: none; margin: 0; padding: 0;
+    display: flex; justify-content: center; gap: 16px; list-style: none; margin: 0; padding: 0; border-radius: 30px !important;
 }
+
+
 .category-buttons a {
     text-decoration: none; font-size: 14px; font-weight: bold; padding: 12px 24px; border-radius: 30px; transition: all 0.3s ease;
 }
@@ -782,7 +845,9 @@ body {
     width: 100%; max-width: 1440px; margin: -225px auto 0; padding: 40px 40px 100px; box-sizing: border-box; 
 }
 .project-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px 30px; 
+     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 50px) clamp(12px, 1.5vw, 30px);
 }
 .project-card {
     display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: #000000;
@@ -829,8 +894,8 @@ body {
    ======================================= */
 .design-special-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 24px; 
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(12px, 1.5vw, 24px);
 }
 
 /* 1. 카드를 Flex로 만들어 빈 공간을 영리하게 채우도록 세팅 */
@@ -1165,7 +1230,7 @@ body {
 ========================================= */
 
 /* 1. 데스크톱 우선 공통 제어 (768px 이상에서 모바일 요소 숨김) */
-@media (min-width: 769px) {
+@media (min-width: 1701px) {
     .mobile-menu-btn, .mobile-close-zone, .menu-close-btn { 
         display: none !important; 
     }
@@ -1173,20 +1238,35 @@ body {
 
 /* 2. 노트북 & 작은 모니터 대응 (1200px 이하) */
 @media (max-width: 1200px) {
-    .container, .hero-content-container, .footer-container {
+    .container, .hero-content-container {
         padding: 0 30px;
     }
     .hero-logo-desc {
         margin-left: 50px;
     }
+.footer-container {
+    padding: clamp(30px, 4vw, 60px) 30px;
 }
 
+}
+
+.mobile-br {
+    display: none;
+}
+
+
+
 /* 3. 태블릿 & 스마트폰 통합 대응 (768px 이하 최종 정돈) */
-@media (max-width: 768px) {
+@media (max-width: 1700px) {
     /* [공통] 가로 여백 최적화 */
-    .container, .hero-content-container, .footer-container { 
+    .container, .hero-content-container { 
         padding: 0 20px; 
     }
+
+    .footer-container {
+    padding: clamp(24px, 4vw, 40px) 20px;
+    }
+    
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
     .hero-content-container { 
@@ -1311,6 +1391,31 @@ body {
     }
     .menu-box.active .menu-close-btn {
         opacity: 1;
+    }
+
+    .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+    }
+
+    .growth-grid {
+    grid-template-columns: 1fr;
+    }
+
+    .growth-box {
+    aspect-ratio: 5 / 3;
+    }
+    
+    .mobile-br {
+        display: inline;
+    }
+}
+
+
+
+
+@media (max-width: 500px) {
+    .view-all-link {
+        display: none;
     }
 }
 
