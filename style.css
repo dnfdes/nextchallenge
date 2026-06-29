@@ -1046,7 +1046,7 @@ body {
 }
 
 .contact-page {
-    background-color: #757e88;
+    background-color: #758188;
 }
 
 /* Contact 페이지 전용 푸터 색상 반전 (사진이 왼쪽, 글씨가 오른쪽) */
@@ -1141,4 +1141,67 @@ body {
     right: 40px;  /* 메인 페이지 고정 위치와 통일 */
     z-index: 9999;      
     /* 💡 transform이나 animation을 다 빼버려서 충돌 요소를 원천 차단합니다 */
+}
+
+/* =========================================
+   2. 노트북 & 작은 모니터 대응 (1200px 이하)
+========================================= */
+@media (max-width: 1200px) {
+    .container, .hero-content-container, .footer-container {
+        padding: 0 30px; /* 전체적인 좌우 여백을 살짝 줄임 */
+    }
+    .hero-logo-desc {
+        margin-left: 50px; /* 글씨가 그래픽에 닿지 않도록 여백 조정 */
+    }
+}
+
+/* =========================================
+   3. 태블릿 & 스마트폰 통합 대응 (768px 이하) - 핵심 구간
+========================================= */
+@media (max-width: 768px) {
+    /* [공통] 모바일 가로 여백 최적화 */
+    .container, .hero-content-container, .footer-container {
+        padding: 0 20px; 
+    }
+
+    /* 1) 상단바 모바일 정렬 */
+    .header-nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    .menu-list {
+        gap: 20px;
+    }
+
+    /* 2) 히어로 영역 세로 1줄 정렬 및 배경 이동 */
+    .hero-content-container {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 40px; /* 글씨와 버튼 사이 간격 */
+    }
+    .hero-logo-desc {
+        margin-left: 0; /* 강제 여백 초기화 */
+        text-align: center;
+    }
+    .hero-bg-graphic {
+        /* 💡 이미지를 모바일 화면 정중앙으로 이동시켜 잘림 방지 */
+        background-position: center center !important; 
+        background-size: cover !important;
+        opacity: 0.4; /* 글씨 가독성을 위해 배경을 살짝 흐리게 방어 */
+    }
+
+    /* 3) 푸터 영역 세로 1줄 정렬 및 중앙 배치 */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    .footer-right {
+        text-align: center; /* 💡 우측 정렬이었던 회사 정보를 중앙 정렬로 변경 */
+    }
+    .footer-right p:nth-child(3) {
+        margin-bottom: 10px; /* 모바일에서는 여백을 좁혀서 컴팩트하게 */
+    }
 }
