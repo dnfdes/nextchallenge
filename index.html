@@ -72,16 +72,17 @@
     <section class="intro-box-section reveal-item">
         <div class="container">
             <div class="intro-box">
+                <div class="container">
                 <h2 class="intro-title">
-    <span>EXPERIENCE,
-    <br class="mobile-br">
-    BEYOND EVENTS.</span>
-</h2>
+                 <span>EXPERIENCE,
+                 <br class="mobile-br">
+                  BEYOND EVENTS.</span>
+                </h2>
             
             <div class="intro-desc-group">
                 <p>하나의 현장은 수많은 선택으로 완성됩니다.</p>
                 <p>보이는 장면뿐 아니라 보이지 않는 흐름까지.</p>
-                <p>넥스트챌린지는 그 모든 순간이<br class="mobile-only-br">하나의 경험으로 기억되도록 만듭니다.</p>
+                <p>넥스트챌린지는 그 모든 순간이 <br class="mobile-br">하나의 경험으로 기억되도록 만듭니다.</p>
             </div>
         </div>
     </section>
@@ -294,6 +295,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+
+<script>
+const heroCopy = document.querySelector('.hero-copy');
+const introBox = document.querySelector('.intro-box .container');
+
+if (window.innerWidth <= 768) {
+    introBox.prepend(heroCopy);
+}
+</script>
+
 </body>
 
 </html>

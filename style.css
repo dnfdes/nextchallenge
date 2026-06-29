@@ -124,12 +124,14 @@ body {
 ========================================= */
 .hero-gradient {
     position: relative;
-    min-height: 100vh; 
+    min-height: 130vh; 
     display: flex;
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
         min-height: 1200px;
+
+        z-index: 1;
 }
 
 .hero-gradient::after {
@@ -140,12 +142,16 @@ body {
     right: 0;
     bottom: 0;
 
-    height: 350px;
+    height: 500px;
+
+z-index: 1;
 
     background: linear-gradient(
         to bottom,
         rgba(255,255,255,0),
         rgba(255,255,255,1)
+
+
     );
 
     pointer-events: none;
@@ -184,22 +190,11 @@ body {
  color: #fff;
 }
 
-@media (max-width: 1865px) {
-    .hero-copy {
-        display: none;
-    }
-}
-
-@media (max-width: 875px) {
-    .front-content-group {
-        top: 80px;
-    }
-}
 
 @media (max-width: 1150px) {
     .front-content-group {
         left: -10%;
-   top: 80px; /* 875px에 있던 거 여기로 통합 */
+        top: 0px;
         width: clamp(500px, 150vw, 1700px);
 
     }
@@ -367,8 +362,11 @@ min-height: clamp(100px, 110vw, 1300px);
 .intro-box {
     background-color: #A2AEBC;
     color: #ffffff;
+        width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     border-radius: 0px;
-    padding: clamp(40px, 6vw, 60px) clamp(40px, 4vw, 60px);
+    padding: clamp(40px, 6vw, 60px) 0;
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -1236,7 +1234,10 @@ min-height: clamp(100px, 110vw, 1300px);
     .mobile-menu-btn, .mobile-close-zone, .menu-close-btn { 
         display: none !important; 
     }
+
 }
+
+
 
 /* 2. 노트북 & 작은 모니터 대응 (1200px 이하) */
 @media (max-width: 1200px) {
@@ -1249,6 +1250,8 @@ min-height: clamp(100px, 110vw, 1300px);
 .footer-container {
     padding: clamp(30px, 4vw, 60px) 30px;
 }
+
+
 
 }
 
@@ -1265,10 +1268,27 @@ min-height: clamp(100px, 110vw, 1300px);
         padding: 0 20px; 
     }
 
+            .hero-copy {
+        top: 15%;
+        left: 7%;
+
+        /* 필요하면 */
+        transform: translateY(-50%);
+        mix-blend-mode: difference;
+            }
+
+            .hero-copy-title {
+        font-size: clamp(17px, 3.5vw, 36px);
+    }
+
+    .hero-copy-body p {
+        font-size: clamp(12px, 2vw, 30px);
+    }
+
     .footer-container {
     padding: clamp(24px, 4vw, 40px) 20px;
     }
-    
+
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
     .hero-content-container { 
@@ -1291,7 +1311,7 @@ min-height: clamp(100px, 110vw, 1300px);
     .header-nav { 
         position: fixed; 
         width: 100%; 
-        height: 75px; 
+        height: 80px; 
         left: 0; 
         top: 0; 
         display: flex; 
@@ -1304,7 +1324,7 @@ min-height: clamp(100px, 110vw, 1300px);
     /* 💡 [로고 정중앙 고정] 주변 요소 간섭 완전 차단 */
     .header-nav .logo-box { 
         position: absolute; 
-        left: 50%; 
+        left: 50px; 
         top: 50%; 
         transform: translate(-50%, -50%); 
         margin: 0; 
@@ -1319,7 +1339,7 @@ min-height: clamp(100px, 110vw, 1300px);
     .mobile-menu-btn { 
         display: block; 
         position: absolute; 
-        left: 20px; 
+        right: 20px; 
         top: 50%; 
         transform: translateY(-50%); 
         background: none; 
@@ -1333,7 +1353,7 @@ min-height: clamp(100px, 110vw, 1300px);
 
     /* 👉 [슬라이드 내비게이션 드로우] */
     .menu-box {
-        position: fixed; top: 0; left: 0;
+        position: fixed; top: 0; right: 0;
         width: 100vw; height: 100vh;
         z-index: 2000;
         background-color: rgba(0, 0, 0, 0);
@@ -1345,22 +1365,22 @@ min-height: clamp(100px, 110vw, 1300px);
 
     /* 왼쪽에서 나오는 80% 흰색 패널 */
     .menu-content-panel {
-        position: absolute; top: 0; left: 0;
+        position: absolute; top: 0; right: 0;
         width: 80%; height: 100%;
         background-color: #ffffff;
         padding: 100px 40px; box-sizing: border-box;
-        transform: translateX(-100%);
+        transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     /* 우측 20% 투명 닫기 영역 */
     .mobile-close-zone {
-        position: absolute; top: 0; right: 0;
+        position: absolute; top: 0; left: 0;
         width: 20%; height: 100%;
         cursor: pointer;
     }
     .menu-close-btn {
-        position: absolute; top: 20px; left: 20px;
+        position: absolute; top: 20px; right: 20px;
         background: none; border: none; padding: 0;
         font-size: 42px; color: #ffffff; cursor: pointer;
         display: block;
@@ -1426,11 +1446,48 @@ min-height: clamp(100px, 110vw, 1300px);
 ========================================= */
 @media (orientation: portrait) {
     /* 💡 우측 Contact 버튼 구역을 아예 숨겨버립니다 */
+
     .hero-right-wrapper {
         display: none !important;
     }
     .sub-contact-wrapper{
         display: none !important;
     }
+
+        .front-content-group {
+        left: -10%;
+        top: 0px;
+        width: clamp(500px, 150vw, 1700px);
+                z-index: 2;
+
+    }
+
+            /* 2. 텍스트 위치 변경 */
+    .hero-copy {
+        right: auto;
+        left: clamp(5%, 2%, 1%);
+        top: auto;
+        bottom: 0;
+        width: 100%;
+        z-index: 1002;
+        color:#000
+    }
+
+        .hero-gradient {
+        min-height: 67vh;
+    }
+
+            .hero-copy-title {
+        font-size: clamp(26px, 4vw, 40px);
+    }
+
+    .hero-copy-body p {
+        font-size: clamp(18px, 1.2vw, 30px);
+    }
+
+        .intro-box-section {
+        margin-top: -60px; /* 원하는 만큼 조절 */
+    }
+
 
 }
