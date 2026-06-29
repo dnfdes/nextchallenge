@@ -172,17 +172,6 @@ body {
     display: block;
     width: 100%;
     height: auto;
-
-        opacity: 0;
-    animation: heroFadeIn 1.8s ease-out forwards;
-}
-@keyframes heroFadeIn {
-    from {
-        opacity: 0.4;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 .hero-copy {
@@ -210,27 +199,17 @@ body {
 @media (max-width: 1150px) {
     .front-content-group {
         left: -10%;
-        width: clamp(
-            500px,   /* C (최소) */
-            150vw,    /* 화면에 따라 다시 감소 */
-            1700px    /* B (최대) */
-        );
+   top: 80px; /* 875px에 있던 거 여기로 통합 */
+        width: clamp(500px, 150vw, 1700px);
+
     }
 
         .hero-gradient {
-        min-height: clamp(
-            100px,   /* 최소 높이 */
-            110vw,   /* 화면이 줄수록 같이 감소 */
-            1300px   /* 최대(1150px 부근) */
-        );
+min-height: clamp(100px, 110vw, 1300px);
     }
 
     .hero-gradient::after {
-    height: clamp(
-        100px,  /* 최소 */
-        35vw,   /* 화면이 줄면 같이 감소 */
-        500px   /* 최대 */
-    );
+ height: clamp(100px, 35vw, 500px);
 }
 }
 
@@ -250,14 +229,6 @@ body {
     font-size: 30px;
     font-weight: 300;
     line-height: 1.1;
-}
-
-
-@media (max-width: 1024px) {
-    .bg-img-front {
-        margin-left: 25px; /* 창이 작아질 때 의도하신 여백 대응 */
-        max-width: calc(100% - 80px); 
-    }
 }
 
 
@@ -656,7 +627,7 @@ body {
 /* 포트폴리오 3열 그리드 */
 .portfolio-grid,.project-grid{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); 
     gap: clamp(20px, 2.5vw, 50px) clamp(12px, 1.5vw, 30px);
     align-items: start;
 }
@@ -664,11 +635,11 @@ body {
 .portfolio-card, .project-card{
     display: flex;
     flex-direction: column;
-    gap: 16px; 
+    gap: 10px; 
 }
 
 
-.portfolio-card .project-name, .project-card .project-name {
+.portfolio-card .project-name{
     text-align: left;
     padding-left: 6px; /* 왼쪽에서 6px 띄움 */
 }
@@ -858,7 +829,7 @@ body {
     font-size: clamp(36px, 5vw, 60px); font-weight: 800; color: #ffffff; margin: 0 0 52px 0; letter-spacing: -1px;
 }
 .category-buttons {
-    display: flex; align-items: center;,  justify-content: center; gap: 16px; list-style: none; margin: 0; padding: 0; border-radius: 30px !important;
+    display: flex; align-items: center;  justify-content: center; gap: 16px; list-style: none; margin: 0; padding: 0; border-radius: 30px !important;
 }
 
 
@@ -877,21 +848,24 @@ body {
 
 /* 하단 프로젝트 리스트 영역 */
 .content-container {
-    width: 100%; max-width: 1440px; margin: -225px auto 0; padding: 40px 40px 100px; box-sizing: border-box; 
+    width: 100%; 
+    max-width: 1440px; 
+    margin: -225px auto 0; 
+    padding: 0 40px 100px; /* portfolio의 container와 좌우 padding 통일 */
+    box-sizing: border-box; 
 }
 .project-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr) !important; 
-    gap: clamp(20px, 4vw, 40px) !important; 
+    gap: clamp(20px, 2.5vw, 50px) clamp(12px, 1.5vw, 30px); /* portfolio와 통일 */
     margin-top: clamp(30px, 5vw, 60px);
 }
-
 
 .project-info {
     display: flex;
     flex-direction: column;
-    gap: 6px; /* 숫자 키우면 더 벌어짐 */
-    padding-left: 12px;
+    gap: 3px;
+    padding-left: 6px; /* 12px → 6px으로 portfolio와 통일 */
 }
 .project-date {
     font-size: clamp(9px, 1vw, 14px); color: #666666; margin: 0;
@@ -903,6 +877,7 @@ body {
     aspect-ratio: 1 / 1;
     overflow: hidden;
     background-color: #f5f5f5;
+    border-radius: var(--main-radius); /* 추가 */
 }
 
 .image-placeholder img {
@@ -1033,13 +1008,6 @@ body {
 /* =========================================
    CONTACT FORM 전용 스타일
 ========================================= */
-
-
-/* Contact 페이지 본문 전용 여백 설정 */
-.contact-main {
-    padding-top: 125px;    /* 상단바 밑으로 콘텐츠가 시원하게 내려오도록 설정 */
-    padding-bottom: 50px; /* 하단 푸터와의 간격을 넉넉하게 설정 */
-}
 
 .contact-main .page-title {
     text-align: left;
@@ -1209,7 +1177,7 @@ body {
 .contact-bg-image {
     position: absolute;
     right: 100px;
-    top: -48px;
+    bottom: 0;
 
     width: 1200px;
 
@@ -1257,12 +1225,14 @@ body {
     /* 💡 transform이나 animation을 다 빼버려서 충돌 요소를 원천 차단합니다 */
 }
 
+
+
 /* =========================================
    [반응형 최적화] 노트북 & 모바일 통합 구역
 ========================================= */
 
 /* 1. 데스크톱 우선 공통 제어 (768px 이상에서 모바일 요소 숨김) */
-@media (min-width: 1701px) {
+@media (min-width: 1500px) {
     .mobile-menu-btn, .mobile-close-zone, .menu-close-btn { 
         display: none !important; 
     }
@@ -1270,7 +1240,7 @@ body {
 
 /* 2. 노트북 & 작은 모니터 대응 (1200px 이하) */
 @media (max-width: 1200px) {
-    .container, .hero-content-container {
+    .container, .hero-content-container, .content-container {
         padding: 0 30px;
     }
     .hero-logo-desc {
@@ -1289,9 +1259,9 @@ body {
 
 
 /* 3. 태블릿 & 스마트폰 통합 대응 (768px 이하 최종 정돈) */
-@media (max-width: 1700px) {
+@media (max-width: 1500px) {
     /* [공통] 가로 여백 최적화 */
-    .container, .hero-content-container { 
+    .container, .hero-content-container, .content-container{ 
         padding: 0 20px; 
     }
 

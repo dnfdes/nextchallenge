@@ -208,177 +208,92 @@
         });
     </script>
 
-    <script>
-    window.addEventListener("load", () => {
-        // 1. 모션 애니메이션들 (담당자님이 완성하신 부분 - 건드리지 않음)
-        gsap.registerPlugin(ScrollTrigger);
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger);
 
-        gsap.fromTo(".hero-reveal", 
+    // 1. 히어로 애니메이션
+    gsap.fromTo(".hero-reveal", 
+        { opacity: 0, y: 50 }, 
+        { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, ease: "power2.out" }
+    );
+
+    // 2. 스크롤 애니메이션
+    gsap.utils.toArray(".reveal-item").forEach((item) => {
+        gsap.fromTo(item, 
             { opacity: 0, y: 50 }, 
-            { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, ease: "power2.out" }
+            { opacity: 1, y: 0, duration: 1,
+              scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none" }
+            }
         );
+    });
 
-        gsap.utils.toArray(".reveal-item").forEach((item) => {
-            gsap.fromTo(item, 
-                { opacity: 0, y: 50 },
-                { 
-                    opacity: 1, y: 0, duration: 1,
-                    scrollTrigger: {
-                        trigger: item, start: "top 85%", toggleActions: "play none none none"
-                    }
-                }
-            );
-        });
+    // 3. 상단바 스크롤
+    const header = document.querySelector('.header-nav');
+    function checkScroll() {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    }
+    window.addEventListener('scroll', checkScroll);
+    checkScroll();
 
-        // =================================================================
-    // 🚨 수정한 컨택트 버튼 로직 (등장/퇴장 애니메이션 + 푸터 방어)
-    // =================================================================
-    let isBtnFixed = false; // 💡 버튼이 현재 고정 상태인지 기억하는 변수
-
+    // 4. 컨택트 버튼 로직
+    let isBtnFixed = false;
     window.addEventListener('scroll', function() {
         const btnWrapper = document.querySelector('.hero-right-wrapper');
         const footer = document.querySelector('.site-footer');
         
-        // 1) 800px 기준 나타나고 사라지기 (부드러운 퇴장 적용)
         if (window.scrollY > 900) {
             if (!isBtnFixed) {
-                // 스크롤 내릴 때: 퇴장 클래스 지우고 등장 클래스 추가
                 btnWrapper.classList.remove('scrolled-out');
                 btnWrapper.classList.add('scrolled-fixed');
                 isBtnFixed = true;
             }
         } else {
             if (isBtnFixed) {
-                // 스크롤 올릴 때: 등장 클래스 지우고 퇴장 클래스 추가
                 btnWrapper.classList.remove('scrolled-fixed');
                 btnWrapper.classList.add('scrolled-out');
                 isBtnFixed = false;
-
-                // 💡 0.3초(퇴장 애니메이션 시간) 뒤에 퇴장 클래스도 완전히 지워서 원래의 히어로 섹션 위치로 복귀시킴
                 setTimeout(() => {
-                    if (window.scrollY <= 1000) { 
-                        btnWrapper.classList.remove('scrolled-out');
-                    }
-                }, 50); 
+                    if (window.scrollY <= 1000) btnWrapper.classList.remove('scrolled-out');
+                }, 50);
             }
         }
 
-        // 2) 푸터 뚫림 방지 로직 (기존과 동일하게 완벽 작동)
         if (footer && btnWrapper.classList.contains('scrolled-fixed')) {
-            const footerTop = footer.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            const overlap = windowHeight - footerTop;
-
-            if (overlap > 0) {
-                btnWrapper.style.marginBottom = `${overlap}px`;
-            } else {
-                btnWrapper.style.marginBottom = '0px';
-            }
+            const overlap = window.innerHeight - footer.getBoundingClientRect().top;
+            btnWrapper.style.marginBottom = overlap > 0 ? `${overlap}px` : '0px';
         } else {
             btnWrapper.style.marginBottom = '0px';
         }
     });
-    });
-    </script>
 
+    // 5. 모바일 메뉴
+    const mobileBtn = document.querySelector(".mobile-menu-btn");
+    const closeBtn = document.querySelector(".menu-close-btn");
+    const closeZone = document.querySelector(".mobile-close-zone");
+    const menuBox = document.querySelector(".menu-box");
 
-<script>
-// 💡 load 대신 DOMContentLoaded로 변경 (이미지 로딩 기다리지 않고 즉시 실행!)
-document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (mobileBtn && menuBox) {
+        mobileBtn.addEventListener("click", () => {
+            menuBox.classList.add("active");
+            history.pushState({ menuOpen: true }, "", "#menu");
+        });
+    }
 
-    // 1. 히어로 섹션 (CSS에서 이미 숨겨뒀으니 깜빡임 없이 즉시 스윽!)
-    gsap.fromTo(".hero-reveal", 
-        { opacity: 0, y: 50 }, // 시작 지점
-        { 
-            opacity: 1, 
-            y: 0,            // 원래 위치
-            duration: 1.5, 
-            stagger: 0.2, 
-            ease: "power2.out" 
+    const closeMenu = () => {
+        if (menuBox && menuBox.classList.contains("active")) {
+            menuBox.classList.remove("active");
+            if (window.location.hash === "#menu") history.back();
         }
-    );
+    };
 
-    // 2. 스크롤 영역 (스크롤할 때마다 작동)
-    gsap.utils.toArray(".reveal-item").forEach((item) => {
-        gsap.fromTo(item, 
-            { opacity: 0, y: 50 }, // 시작 지점
-            { 
-                opacity: 1, 
-                y: 0,              // 원래 위치
-                duration: 1,
-                scrollTrigger: {
-                    trigger: item,
-                    start: "top 85%",
-                    toggleActions: "play none none none"
-                }
-            }
-        );
+    if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+    if (closeZone) closeZone.addEventListener("click", closeMenu);
+    window.addEventListener("popstate", () => {
+        if (menuBox && menuBox.classList.contains("active")) menuBox.classList.remove("active");
     });
 });
 </script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const header = document.querySelector('.header-nav');
-        
-        if (header) {
-            // 사이트가 새로고침 되었을 때 이미 스크롤이 내려가 있는 상태인지 체크하는 함수
-            function checkScroll() {
-                // 💡 50px 이상 스크롤을 내렸다면 .scrolled 클래스를 붙이고, 맨 위라면 뗍니다.
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }
-
-            // 1) 스크롤 할 때마다 실시간 체크
-            window.addEventListener('scroll', checkScroll);
-            
-            // 2) 페이지 처음 들어왔을 때(혹은 새로고침 했을 때) 위치 체크
-            checkScroll();
-        }
-    });
-</script>
-
-<script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const mobileBtn = document.querySelector(".mobile-menu-btn");
-            const closeBtn = document.querySelector(".menu-close-btn");
-            const closeZone = document.querySelector(".mobile-close-zone");
-            const menuBox = document.querySelector(".menu-box");
-
-            // 1) 메뉴 열기 (브라우저 주소에 가상의 #menu를 추가함)
-            if (mobileBtn && menuBox) {
-                mobileBtn.addEventListener("click", () => {
-                    menuBox.classList.add("active");
-                    history.pushState({ menuOpen: true }, "", "#menu");
-                });
-            }
-
-            // 2) 메뉴 닫기 함수 (X버튼이나 빈 공간 누를 때)
-            const closeMenu = () => {
-                if(menuBox && menuBox.classList.contains("active")) {
-                    menuBox.classList.remove("active");
-                    if(window.location.hash === "#menu") {
-                        history.back(); // 주소창 원상복구
-                    }
-                }
-            };
-
-            if (closeBtn) closeBtn.addEventListener("click", closeMenu);
-            if (closeZone) closeZone.addEventListener("click", closeMenu);
-
-            // 3) 💡 휴대폰 '뒤로 가기' 버튼을 눌렀을 때 감지하여 창 닫기
-            window.addEventListener("popstate", (e) => {
-                if (menuBox && menuBox.classList.contains("active")) {
-                    menuBox.classList.remove("active");
-                }
-            });
-        });
-    </script>
-
 </body>
 
 </html>
