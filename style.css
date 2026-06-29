@@ -172,6 +172,17 @@ body {
     display: block;
     width: 100%;
     height: auto;
+
+        opacity: 0;
+    animation: heroFadeIn 1.8s ease-out forwards;
+}
+@keyframes heroFadeIn {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .hero-copy {
@@ -622,7 +633,7 @@ body {
 ========================================= */
 /* 타이틀 */
 .page-title {
-    font-size: 72px;
+    font-size: clamp(40px, 5vw, 72px);  
     font-weight: 800;
     margin: 0px 0 40px 0;
     letter-spacing: -0.5px;
@@ -635,7 +646,7 @@ body {
 }
 
 .year-title {
-    font-size: 30px;
+    font-size: clamp(18px, 5vW, 30px);
     font-weight: bold;
     margin: 0px 0 30px 0;
     border-top: 2px solid #000; 
@@ -643,19 +654,21 @@ body {
 }
 
 /* 포트폴리오 3열 그리드 */
-.portfolio-grid {
+.portfolio-grid,.project-grid{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: clamp(20px, 2.5vw, 50px) clamp(12px, 1.5vw, 30px);
+    align-items: start;
 }
 
-.portfolio-card {
+.portfolio-card, .project-card{
     display: flex;
     flex-direction: column;
     gap: 16px; 
 }
 
-.portfolio-card .project-name {
+
+.portfolio-card .project-name, .project-card .project-name {
     text-align: left;
     padding-left: 6px; /* 왼쪽에서 6px 띄움 */
 }
@@ -665,10 +678,8 @@ body {
     background-color: #f0f0f0;
     aspect-ratio: 1 / 1; /* 4/3에서 1/1(정방형)로 수정되었습니다 */
     border-radius: var(--main-radius);  
-    position: relative;
-    overflow: hidden;
-    display: block;
-    cursor: pointer;
+    width: 100%;
+    
 }
 
 /* 2. 마우스 올리면 나오는 상세정보 칸 */
@@ -695,10 +706,12 @@ body {
 
 /* 3. 사진 바로 밑 프로젝트 이름 */
 .project-name {
-    font-size: 18px;
+    font-size: clamp(11px, 1.5vw, 18px);
     font-weight: bold;
     margin: 0;
     text-align: left; 
+    line-height: 1.1;
+    letter-spacing: -0.03em;
 }
 
 /* =========================================
@@ -754,13 +767,35 @@ body {
     position: absolute; top: 40px; left: 30px; z-index: 10; color: #FFFFFF; 
 }
 .category-name {
-    font-size: 50px; font-weight: 800; margin: 0; line-height: 1.0;
+    font-size: clamp(30px, 3.5vw, 50px); font-weight: 800; margin: 0; line-height: 1.0;
 }
 .right-info {
     position: absolute; bottom: 40px; right: 30px; z-index: 10;
-    color: #FFFFFF; font-size: 20px; font-weight: bold; text-align: right; line-height: 1.3;
+    color: #FFFFFF; font-size: clamp(16px, 1.4vw, 20px); font-weight: bold; text-align: right; line-height: 1.3;
+
 }
 
+@media (max-width: 800px) {
+    .category-info {
+        top: 24px;
+        left: 20px;
+    }
+
+    .right-info {
+        right: 20px;
+        bottom: 24px;
+    }
+}
+
+@media (max-width: 800px) {
+    .work-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .work-card-link .image-placeholder {
+        aspect-ratio: 5 / 3;
+    }
+}
 .hover-overlay {
     display: none !important; 
 }
@@ -800,16 +835,16 @@ body {
 /* 💡 WORK 타이틀 글씨 스타일 */
 .hero-banner .page-title {
     color: #ffffff;                 /* 💡 글씨 색상 흰색 */
-    font-size: 72px; /* 💡 크기를 시원하고 크게 확대 (반응형 적용) */
+    font-size: clamp(40px, 5vw, 72px); /* 💡 크기를 시원하고 크게 확대 (반응형 적용) */
     font-weight: 800;               /* 두껍게 */
     letter-spacing: -1px;           /* 자간 살짝 축소 */
-    margin: 0;
+    margin: 0px;
     text-transform: uppercase;      /* 대문자 고정 */
 }
 
 /* 본문 영역 마진 조정 (그라데이션과 카드 사이가 자연스럽게 이어지도록 여백 리셋) */
 .work-main {
-    margin-top: -250px; /* 💡 상단바 밑으로 콘텐츠가 시원하게 내려오도록 설정 */
+    margin-top: -200px; /* 💡 상단바 밑으로 콘텐츠가 시원하게 내려오도록 설정 */
     padding-bottom: 100px;
 }
 
@@ -820,15 +855,15 @@ body {
 
 /* 카테고리 타이틀 및 알약 버튼 */
 .category-title {
-    font-size: 48px; font-weight: 800; color: #ffffff; margin: 0 0 52px 0; letter-spacing: -1px;
+    font-size: clamp(36px, 5vw, 60px); font-weight: 800; color: #ffffff; margin: 0 0 52px 0; letter-spacing: -1px;
 }
 .category-buttons {
-    display: flex; justify-content: center; gap: 16px; list-style: none; margin: 0; padding: 0; border-radius: 30px !important;
+    display: flex; align-items: center;,  justify-content: center; gap: 16px; list-style: none; margin: 0; padding: 0; border-radius: 30px !important;
 }
 
 
 .category-buttons a {
-    text-decoration: none; font-size: 14px; font-weight: bold; padding: 12px 24px; border-radius: 30px; transition: all 0.3s ease;
+    text-decoration: none; font-size: clamp(12px, 2vw, 14px); font-weight: bold; padding: 12px 24px; border-radius: 30px; transition: all 0.3s ease;
 }
 .btn-active {
     background-color: #ffffff; color: #000000; border: 2px solid #ffffff;
@@ -845,19 +880,12 @@ body {
     width: 100%; max-width: 1440px; margin: -225px auto 0; padding: 40px 40px 100px; box-sizing: border-box; 
 }
 .project-grid {
-     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(20px, 2.5vw, 50px) clamp(12px, 1.5vw, 30px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) !important; 
+    gap: clamp(20px, 4vw, 40px) !important; 
+    margin-top: clamp(30px, 5vw, 60px);
 }
-.project-card {
-    display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: #000000;
-}
-.project-card:hover .image-placeholder {
-    background-color: #e5e5e5;
-    position: relative; /* 자식 요소(이미지)를 이 박스 안에 가두는 기준 */
-    overflow: hidden;   /* [핵심] 박스 밖으로 튀어나가는 건 무조건 잘라버림 */
-    display: block;
-}
+
 
 .project-info {
     display: flex;
@@ -866,7 +894,7 @@ body {
     padding-left: 12px;
 }
 .project-date {
-    font-size: 14px; color: #666666; margin: 0;
+    font-size: clamp(9px, 1vw, 14px); color: #666666; margin: 0;
 
 }
 
@@ -882,10 +910,6 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.project-card:hover .image-placeholder {
-    background-color: #e5e5e5;
 }
 
 
@@ -1019,6 +1043,7 @@ body {
 
 .contact-main .page-title {
     text-align: left;
+    font-size: clamp(40px, 5vw, 72px);
     margin-bottom: 5px;
     color: #ffffff;
     margin-left: -5px;
@@ -1040,15 +1065,15 @@ body {
 }
 
 #name {
-    width: 600px;
+    width: 300px;
 }
 
 #tel {
-    width: 400px;
+    width: 200px;
 }
 
 #email {
-    width: 600px;
+    width: 300px;
 }
 
 #details {
@@ -1063,7 +1088,7 @@ body {
 }
 
 .form-group label {
-    font-size: 15px;
+    font-size: clamp(13px, 1.2vw, 15px);
     font-weight: 500;
     color: #FFFFFF;
 }
@@ -1071,19 +1096,25 @@ body {
 
 .form-group input,
 .form-group textarea {
-    width: 100%;
-    padding: 12px 18px;
+    /* 💡 가로폭 100%에 최대폭을 600px로 제한하여 가로길이 반응형 구현 */
+    width: clamp(120px, 10vw, 220px);
+    
+    /* 💡 패딩과 폰트 크기에 clamp 적용 (창 크기에 맞춰 줄어듦) */
+    padding: clamp(10px, 1.5vw, 12px) clamp(14px, 2vw, 18px);
+    font-size: clamp(13px, 1.2vw, 14px);
+    
     border: 1px solid #d9d9d9;
     border-radius: var(--main-radius);
+    
     font-family: 'Pretendard', sans-serif;
-    font-size: 14px;
     box-sizing: border-box;
     transition: all 0.3s ease;
     background-color: #ffffff;
 }
 
 .form-group textarea {
-    min-height: 220px;
+    /* 💡 최소 높이도 창이 작아지면 비율에 맞춰 줄어들도록 조절 */
+    min-height: clamp(150px, 20vw, 220px);
     resize: vertical;
 }
 
@@ -1135,7 +1166,7 @@ body {
     color: #ffffff; /* 💡 오른쪽으로 간 글씨 하얗게 변경 */
 }
 .contact-desc {
-    font-size: 18px;
+    font-size: clamp(13px, 1.5vw, 18px);
     font-weight: 500; /* medium */
     margin: 0 0 24px 0;
     color: #ffffff;
@@ -1149,6 +1180,7 @@ body {
     display: block;
     margin-bottom: -2px; /* 💡 글자와 바로 밑 입력칸(input) 사이의 간격 */
 }
+
 
 
 .details-note {
@@ -1427,4 +1459,8 @@ body {
     .hero-right-wrapper {
         display: none !important;
     }
+    .sub-contact-wrapper{
+        display: none !important;
+    }
+
 }
