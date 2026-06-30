@@ -244,7 +244,7 @@ min-height: clamp(100px, 90vw, 900px);
 
 
 /* 💡 나타날 때 (스크롤 내릴 때) */
-.hero-right-wrapper.scrolled-fixed {
+.hero-gradient .hero-right-wrapper.scrolled-fixed {
     position: fixed;    
     bottom: 60px;    
     right: 40px;
