@@ -46,7 +46,7 @@
 
 <section class="hero-gradient">
 
-        <div class="front-content-group">
+        <div class="front-content-group hero-fade-item">
             <img src="images/hero_BG_new.svg" alt="Back View Logo" class="bg-img-back">
                 </div>
 
@@ -228,6 +228,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
     });
+
+gsap.utils.toArray(".hero-fade-item").forEach((item) => {
+    gsap.fromTo(item, 
+        { opacity: 0.5 }, 
+        { 
+            opacity: 1, duration: 1,
+            scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none" }
+        }
+    );
+});
+    
 
     // 3. 상단바 스크롤
     const header = document.querySelector('.header-nav');

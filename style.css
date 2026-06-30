@@ -242,11 +242,6 @@ min-height: clamp(100px, 110vw, 1300px);
     z-index: 100;
 }
 
-@media (max-width: 1440px) {
-    .hero-right-wrapper {
-        right: 40px;    
-    }
-}
 
 /* 💡 나타날 때 (스크롤 내릴 때) */
 .hero-right-wrapper.scrolled-fixed {
@@ -1285,11 +1280,6 @@ min-height: clamp(100px, 110vw, 1300px);
         font-size: clamp(17px, 3.5vw, 36px);
     }
 
-    .sub-contact-wrapper {
-        bottom: 30px; /* 기존 값보다 작게 조절 */
-    }
-
-
     .hero-copy-body p {
         font-size: clamp(12px, 2vw, 30px);
     }
@@ -1299,7 +1289,10 @@ min-height: clamp(100px, 110vw, 1300px);
     }
 
 
-
+    .hero-gradient .hero-right-wrapper {
+        top: 57%;
+        right: 4%;
+    }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
     .hero-content-container { 
@@ -1459,7 +1452,7 @@ min-height: clamp(100px, 110vw, 1300px);
     /* 💡 우측 Contact 버튼 구역을 아예 숨겨버립니다 */
 
     .hero-right-wrapper {
-        display: none !important;
+        display: none ;
     }
     .sub-contact-wrapper{
         display: none !important;
