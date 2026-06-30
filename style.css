@@ -1291,7 +1291,7 @@ min-height: clamp(100px, 110vw, 1300px);
 
     .hero-gradient .hero-right-wrapper {
         top: 57%;
-        right: px;
+        right: 30px;
     }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
