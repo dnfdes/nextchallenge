@@ -200,11 +200,11 @@ z-index: 1;
     }
 
         .hero-gradient {
-min-height: clamp(100px, 110vw, 1300px);
+min-height: clamp(100px, 110vw, 1100px);
     }
 
     .hero-gradient::after {
- height: clamp(100px, 35vw, 500px);
+ height: clamp(100px, 38vw, 400px);
 }
 }
 
@@ -1258,7 +1258,10 @@ min-height: clamp(100px, 110vw, 1300px);
     display: none;
 }
 
-
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
 
 /* 3. 태블릿 & 스마트폰 통합 대응 (768px 이하 최종 정돈) */
 @media (max-width: 1500px) {
@@ -1291,7 +1294,7 @@ min-height: clamp(100px, 110vw, 1300px);
 
     .hero-gradient .hero-right-wrapper {
         top: 57%;
-        right: px;
+        right: 30px;
     }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
@@ -1422,6 +1425,12 @@ min-height: clamp(100px, 110vw, 1300px);
     
     .mobile-br {
         display: inline;
+    }
+}
+
+@media (max-width: 1500px) and (orientation: landscape) {
+    .menu-content-panel {
+        width: 30%;
     }
 }
 
