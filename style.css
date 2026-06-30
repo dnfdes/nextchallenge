@@ -1291,7 +1291,7 @@ min-height: clamp(100px, 110vw, 1300px);
 
     .hero-gradient .hero-right-wrapper {
         top: 57%;
-        right: 4%;
+        right: px;
     }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
@@ -1419,6 +1419,13 @@ min-height: clamp(100px, 110vw, 1300px);
         opacity: 1;
     }
 
+    
+    .mobile-br {
+        display: inline;
+    }
+}
+
+@media (max-width: 1000px) {
     .feature-grid {
     grid-template-columns: repeat(2, 1fr);
     }
@@ -1430,14 +1437,7 @@ min-height: clamp(100px, 110vw, 1300px);
     .growth-box {
     aspect-ratio: 5 / 3;
     }
-    
-    .mobile-br {
-        display: inline;
-    }
 }
-
-
-
 
 @media (max-width: 500px) {
     .view-all-link {
