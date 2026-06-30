@@ -195,12 +195,12 @@ z-index: 1;
     .front-content-group {
         left: -10%;
         top: 0px;
-        width: clamp(500px, 150vw, 1700px);
+        width: clamp(500px, 150vw, 1500px);
 
     }
 
         .hero-gradient {
-min-height: clamp(100px, 110vw, 1100px);
+min-height: clamp(100px, 90vw, 900px);
     }
 
     .hero-gradient::after {
@@ -1294,7 +1294,7 @@ html, body {
 
     .hero-gradient .hero-right-wrapper {
         top: 57%;
-        right: 30px;
+        right: 50px;
     }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
