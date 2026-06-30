@@ -1285,6 +1285,11 @@ min-height: clamp(100px, 110vw, 1300px);
         font-size: clamp(17px, 3.5vw, 36px);
     }
 
+    .sub-contact-wrapper {
+        bottom: 30px; /* 기존 값보다 작게 조절 */
+    }
+
+
     .hero-copy-body p {
         font-size: clamp(12px, 2vw, 30px);
     }
@@ -1292,6 +1297,8 @@ min-height: clamp(100px, 110vw, 1300px);
     .footer-container {
     padding: clamp(24px, 4vw, 40px) 20px;
     }
+
+
 
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
