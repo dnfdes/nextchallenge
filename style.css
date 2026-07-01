@@ -336,15 +336,16 @@ min-height: clamp(100px, 90vw, 900px);
 
 /* 얇은 글씨 3줄 그룹 스타일 */
 .intro-desc-group p {
-    font-size: clamp(12px, 1.1vw, 20px);
+    font-size: clamp(14px, 1.6vw, 20px);
     font-weight: 300; 
     line-height: 1.2; 
     margin: 0;
+    padding-top: 10px;
     color: rgba(255, 255, 255, 0.9); 
 }
 
 .intro-desc-group p:nth-child(2) {
-    margin-bottom: 24px; 
+    margin-bottom: 10px; 
 }
 
 /* 2. 핵심 카피 박스 (중앙 관통, 직각 사각형, 좌측 정렬) */
@@ -372,10 +373,10 @@ min-height: clamp(100px, 90vw, 900px);
 
 /* 굵은 글씨 1줄 스타일 */
 .intro-title {
-    font-size: clamp(22px, 2vw, 36px); /* 기존 크기보다 조금 더 시원하게 키움 */
+    font-size: clamp(22px, 2.5vw, 36px); /* 기존 크기보다 조금 더 시원하게 키움 */
     font-weight: 800; /* 아주 굵게 */
     margin: 0;
-    line-height: 1.3;
+    line-height: 1.1;
     letter-spacing: -0.5px;
 }
  
@@ -829,7 +830,7 @@ min-height: clamp(100px, 90vw, 900px);
 
 
 .category-buttons a {
-    text-decoration: none; font-size: clamp(10px, 2vw, 14px); font-weight: bold; padding: clamp(6px, 1vw, 12px) clamp(10px, 2vw, 20px); border-radius: 30px; transition: all 0.3s ease;
+    text-decoration: none; font-size: clamp(14px, 2vw, 18px); font-weight: bold; padding: clamp(5px, 1vw, 11px) clamp(8px, 1.6vw, 14px); border-radius: 30px; transition: all 0.3s ease;
 }
 .btn-active {
     background-color: #ffffff; color: #000000; border: 2px solid #ffffff;
@@ -1224,6 +1225,10 @@ min-height: clamp(100px, 90vw, 900px);
     /* 💡 transform이나 animation을 다 빼버려서 충돌 요소를 원천 차단합니다 */
 }
 
+        .mobile-br {
+        display: none;
+        }
+
 
 
 /* =========================================
@@ -1256,9 +1261,6 @@ min-height: clamp(100px, 90vw, 900px);
 
 }
 
-.mobile-br {
-    display: none;
-}
 
 html, body {
     overflow-x: hidden;
@@ -1274,7 +1276,7 @@ html, body {
 
     .hero-copy {
         top: 35%;
-        right: 10%;
+        right: 6%;
 
         /* 필요하면 */
         transform: translateY(-50%);
@@ -1296,7 +1298,7 @@ color: #ffffff;
 
     .hero-gradient .hero-right-wrapper {
         top: 50%;
-        right: 10%;
+        right: 6%;
     }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
@@ -1424,11 +1426,8 @@ color: #ffffff;
         opacity: 1;
     }
 
-    
-    .mobile-br {
-        display: inline;
     }
-}
+
 
 @media (max-width: 1500px) and (orientation: landscape) {
     .menu-content-panel {
@@ -1462,6 +1461,10 @@ color: #ffffff;
 @media (orientation: portrait) {
     /* 💡 우측 Contact 버튼 구역을 아예 숨겨버립니다 */
 
+            .mobile-br {
+        display: block;
+        }
+
     .hero-right-wrapper {
         display: none ;
     }
@@ -1476,8 +1479,11 @@ color: #ffffff;
                 z-index: 2;
                 overflow-x: hidden
 
+    
+
     }
 
+    
             /* 2. 텍스트 위치 변경 */
     .hero-copy {
 
@@ -1521,23 +1527,28 @@ mix-blend-mode: difference;*/
     }
 
         .menu-box {
-        width: calc(100% * 1.176);
-        height: calc(100% * 1.176);
+        width: calc(100% * 1.429);
+        height: calc(100% * 1.429);
     }
 
-        .hero-gradient .hero-right-wrapper.scrolled-fixed {
-        right: calc(40px * 1.176);
-        bottom: calc(60px * 1.176);
+    .hero-gradient .hero-right-wrapper.scrolled-fixed {
+    right: calc(40px * 1.429);
+    bottom: calc(60px * 1.429);;
     }
     
     .sub-contact-wrapper {
-        right: calc(40px * 1.176);
-        bottom: calc(60px * 1.176);
+        right: calc(40px * 1.429);
+        bottom: calc(60px * 1.429);
     }
 
     .intro-box {
-        width: calc(100vw / 0.8);
-        margin-left: calc(50% - (100vw / 0.8) / 2);
+        width: calc(100vw / 0.7);
+        margin-left: calc(50% - (100vw / 0.7) / 2);
         margin-right: 0;
+    }
+
+    .front-content-group {
+        transform: scale(1.20);
+        transform-origin: left top;
     }
 }
