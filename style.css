@@ -1517,7 +1517,7 @@ mix-blend-mode: difference;*/
 
 @media (max-width: 1500px) and (orientation: landscape) {
     body {
-        zoom: 0.85; /* 전체를 85%로 축소, 원하는 값으로 조절 */
+        zoom: 0.70; /* 전체를 85%로 축소, 원하는 값으로 조절 */
     }
 
         .menu-box {
