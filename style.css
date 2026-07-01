@@ -351,6 +351,8 @@ min-height: clamp(100px, 90vw, 900px);
 .intro-box-section {
     padding: 60px 0 100px;
     background-color: #ffffff;
+
+    
 }
 
 /* 카피 박스 전체 통 기본 정렬 */
@@ -1270,14 +1272,14 @@ html, body {
         padding: 0 20px; 
     }
 
-            .hero-copy {
-  filter: grayscale(100%); /* 필요하면 */
-  filter: contrast(1000%);
+    .hero-copy {
+        top: 35%;
+        right: 10%;
 
         /* 필요하면 */
         transform: translateY(-50%);
-        mix-blend-mode: difference;
-            }
+        color: #ffffff;
+        }
 
             .hero-copy-title {
         font-size: clamp(17px, 3.5vw, 36px);
@@ -1293,8 +1295,8 @@ html, body {
 
 
     .hero-gradient .hero-right-wrapper {
-        top: 57%;
-        right: 50px;
+        top: 50%;
+        right: 10%;
     }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
@@ -1478,13 +1480,16 @@ html, body {
 
             /* 2. 텍스트 위치 변경 */
     .hero-copy {
-        right: auto;
+
+        display: none;
+        /*right: auto;
         left: clamp(5%, 2%, 1%);
         top: auto;
         bottom: 0;
         width: 100%;
         z-index: 2000;
-        color:#000
+mix-blend-mode: difference;*/
+
     }
 
         .hero-gradient {
@@ -1528,5 +1533,11 @@ html, body {
     .sub-contact-wrapper {
         right: calc(40px * 1.176);
         bottom: calc(60px * 1.176);
+    }
+
+    .intro-box {
+        width: calc(100vw / 0.8);
+        margin-left: calc(50% - (100vw / 0.8) / 2);
+        margin-right: 0;
     }
 }
