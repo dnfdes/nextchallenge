@@ -1278,11 +1278,11 @@ html, body {
 
         /* 필요하면 */
         transform: translateY(-50%);
-        color: #ffffff;
+color: #ffffff;
         }
 
             .hero-copy-title {
-        font-size: clamp(17px, 3.5vw, 36px);
+        font-size: clamp(17px, 3.0vw, 30px);
     }
 
     .hero-copy-body p {
