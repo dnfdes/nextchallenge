@@ -1272,6 +1272,7 @@ html, body {
 
             .hero-copy {
   filter: grayscale(100%); /* 필요하면 */
+  filter: contrast(1000%);
 
         /* 필요하면 */
         transform: translateY(-50%);
