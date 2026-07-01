@@ -1276,7 +1276,7 @@ html, body {
 
     .hero-copy {
         top: 35%;
-        right: 6%;
+        right: 7%;
 
         /* 필요하면 */
         transform: translateY(-50%);
@@ -1298,7 +1298,7 @@ color: #ffffff;
 
     .hero-gradient .hero-right-wrapper {
         top: 50%;
-        right: 6%;
+        right: 7%;
     }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
