@@ -1332,7 +1332,7 @@ color: #ffffff;
         background-color: transparent;
     }
 
-    /* 💡 [로고 정중앙 고정] 주변 요소 간섭 완전 차단 */
+
     .header-nav .logo-box { 
         position: absolute; 
         left: 50px; 
@@ -1346,7 +1346,6 @@ color: #ffffff;
         width: auto; 
     }
 
-    /* 햄버거 버튼 좌측 독립 배치 */
     .mobile-menu-btn { 
         display: block; 
         position: absolute; 
@@ -1552,12 +1551,40 @@ mix-blend-mode: difference;*/
         transform-origin: left top;
     }
 
-        .logo-box img{
-        transform: scale(1.228571);
-        transform-origin: left center;
-    }
         .footer-left img {
         transform: scale(1.7);
         transform-origin: left center;
     }
+
+ .header-nav {
+        height: calc(80px * 1.428571);
+        padding: 0 calc(20px * 1.428571);
+    }
+
+    .header-nav .logo-box {
+        left: calc(50px * 1.428571);
+    }
+
+    .header-nav .logo-box img {
+        height: calc(40px * 1.428571) !important;
+        width: auto;
+    }
+
+    .mobile-menu-btn {
+        right: calc(20px * 1.428571);
+        padding: calc(10px * 1.428571);
+    }
+
+    .mobile-menu-btn span {
+        display: block;
+        width: calc(25px * 1.428571);
+        height: calc(2px * 1.428571);
+        margin: calc(5px * 1.428571) 0;
+        background-color: #000000;
+    }
+
+    .contact-page .mobile-menu-btn span {
+        background-color: #ffffff;
+    }
+
 }
