@@ -1551,4 +1551,13 @@ mix-blend-mode: difference;*/
         transform: scale(1.20);
         transform-origin: left top;
     }
+
+        .logo-box img{
+        transform: scale(1.228571);
+        transform-origin: left center;
+    }
+        .footer-left img {
+        transform: scale(1.7);
+        transform-origin: left center;
+    }
 }
