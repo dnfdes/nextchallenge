@@ -1271,8 +1271,7 @@ html, body {
     }
 
             .hero-copy {
-        top: 15%;
-        left: 7%;
+  filter: grayscale(100%); /* 필요하면 */
 
         /* 필요하면 */
         transform: translateY(-50%);
@@ -1512,7 +1511,7 @@ html, body {
 
 @media (max-width: 1500px) and (orientation: landscape) {
     body {
-        zoom: 0.8; /* 전체를 85%로 축소, 원하는 값으로 조절 */
+        zoom: 0.85; /* 전체를 85%로 축소, 원하는 값으로 조절 */
     }
 
         .menu-box {
