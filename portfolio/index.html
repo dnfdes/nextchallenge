@@ -12,9 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
-<body>
-
-    <body class="portfolio-page-body">
+<body class="portfolio-page-body">
 
 <header class="header-nav at-top" id="main-nav">
         <button class="mobile-menu-btn" aria-label="메뉴 열기">
@@ -231,147 +229,7 @@
     <a href="/contact/" class="contact-pill-btn">CONTACT ↗</a>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const header = document.querySelector('.header-nav');
-        
-        if (header) {
-            // 사이트가 새로고침 되었을 때 이미 스크롤이 내려가 있는 상태인지 체크하는 함수
-            function checkScroll() {
-                // 💡 50px 이상 스크롤을 내렸다면 .scrolled 클래스를 붙이고, 맨 위라면 뗍니다.
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }
-
-            // 1) 스크롤 할 때마다 실시간 체크
-            window.addEventListener('scroll', checkScroll);
-            
-            // 2) 페이지 처음 들어왔을 때(혹은 새로고침 했을 때) 위치 체크
-            checkScroll();
-        }
-    });
-</script>
-
-<script>
-window.addEventListener("load", () => {
-    window.addEventListener('scroll', function() {
-        const subBtnWrapper = document.querySelector('.sub-contact-wrapper');
-        const footer = document.querySelector('.site-footer');
-        
-        if (footer && subBtnWrapper) {
-            const footerTop = footer.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            // 푸터가 화면 하단 위로 몇 픽셀이나 올라왔는지 실시간 계산
-            const overlap = windowHeight - footerTop;
-
-            if (overlap > 0) {
-                // 푸터가 보이기 시작하면 딱 그 높이만큼 마진을 주어 위로 도망가게 함
-                subBtnWrapper.style.marginBottom = `${overlap}px`;
-            } else {
-                // 푸터가 안 보일 때는 원래 고정 위치(bottom: 60px) 유지
-                subBtnWrapper.style.marginBottom = '0px';
-            }
-        }
-    });
-});
-</script>
-
-<script>
-    window.addEventListener("load", () => { 
-        if (typeof gsap !== "undefined") {
-            gsap.registerPlugin(ScrollTrigger);
-
-            if ("scrollRestoration" in history) {
-                history.scrollRestoration = "manual";
-            }
-
-            // 1. 첫 화면 히어로 배너 효과
-            gsap.fromTo(".hero-reveal", 
-                { opacity: 0, y: 50 }, 
-                { 
-                    opacity: 1, y: 0, duration: 1.5, ease: "power2.out",
-                    clearProps: "transform"
-                }
-            );
-
-            // 2. 스크롤 시 순차적으로 나타나는 효과
-            gsap.utils.toArray(".reveal-item").forEach((item) => {
-                gsap.fromTo(item, 
-                    { opacity: 0, y: 50 }, 
-                    { 
-                        opacity: 1, y: 0, duration: 1,
-                        clearProps: "transform",
-                        scrollTrigger: {
-                            trigger: item,
-                            start: "top 85%",
-                            toggleActions: "play none none none"
-                        }
-                    }
-                );
-            });
-
-            // 🚨 핵심 해결책: 화면이 다 그려지고 0.1초 뒤에 위치를 정확하게 다시 잡습니다!
-            setTimeout(() => {
-                ScrollTrigger.refresh();
-            }, 100);
-        }
-
-        // 3. 상단바 스크롤 감지 효과
-        const header = document.querySelector('.header-nav');
-        if (header) {
-            function checkScroll() {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }
-            window.addEventListener('scroll', checkScroll);
-            checkScroll(); 
-        }
-    });
-</script>
-
-<script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const mobileBtn = document.querySelector(".mobile-menu-btn");
-            const closeBtn = document.querySelector(".menu-close-btn");
-            const closeZone = document.querySelector(".mobile-close-zone");
-            const menuBox = document.querySelector(".menu-box");
-
-            // 1) 메뉴 열기 (브라우저 주소에 가상의 #menu를 추가함)
-            if (mobileBtn && menuBox) {
-                mobileBtn.addEventListener("click", () => {
-                    menuBox.classList.add("active");
-                    history.pushState({ menuOpen: true }, "", "#menu");
-                });
-            }
-
-            // 2) 메뉴 닫기 함수 (X버튼이나 빈 공간 누를 때)
-            const closeMenu = () => {
-                if(menuBox && menuBox.classList.contains("active")) {
-                    menuBox.classList.remove("active");
-                    if(window.location.hash === "#menu") {
-                        history.back(); // 주소창 원상복구
-                    }
-                }
-            };
-
-            if (closeBtn) closeBtn.addEventListener("click", closeMenu);
-            if (closeZone) closeZone.addEventListener("click", closeMenu);
-
-            // 3) 💡 휴대폰 '뒤로 가기' 버튼을 눌렀을 때 감지하여 창 닫기
-            window.addEventListener("popstate", (e) => {
-                if (menuBox && menuBox.classList.contains("active")) {
-                    menuBox.classList.remove("active");
-                }
-            });
-        });
-    </script>
+<script src="../script.js"></script>
 
 </body>
 </html>
