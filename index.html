@@ -85,6 +85,8 @@
                 <p>넥스트챌린지는 그 모든 순간이 <br class="mobile-br">하나의 경험으로 기억되도록 만듭니다.</p>
             </div>
         </div>
+        </div>
+        </div>
     </section>
 
     <section class="section-block reveal-item">
@@ -128,6 +130,7 @@
                     <div class="feature-pill">· 2025 Youth e-Sports Festival</div>
                 </div>
             </div>
+        </div>
     </section>
 
     <section class="section-block reveal-item" id="growth-section">
@@ -196,125 +199,7 @@
                 </div>
             </footer>   
     
-    <script>
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('main-nav');
-            
-            // 스크롤이 50px 이상 내려가면 회색 클래스(at-top)를 제거하고, 맨 위로 오면 다시 추가합니다.
-            if (window.scrollY > 50) {
-                nav.classList.remove('at-top');
-            } else {
-                nav.classList.add('at-top');
-            }
-        });
-    </script>
-
- <script>
-document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // 1. 히어로 애니메이션
-    gsap.fromTo(".hero-reveal", 
-        { opacity: 0, y: 50 }, 
-        { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, ease: "power2.out" }
-    );
-
-    // 2. 스크롤 애니메이션
-    gsap.utils.toArray(".reveal-item").forEach((item) => {
-        gsap.fromTo(item, 
-            { opacity: 0, y: 50 }, 
-            { opacity: 1, y: 0, duration: 1,
-              scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none" }
-            }
-        );
-    });
-
-gsap.utils.toArray(".hero-fade-item").forEach((item) => {
-    gsap.fromTo(item, 
-        { opacity: 0.5 }, 
-        { 
-            opacity: 1, duration: 1,
-            scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none" }
-        }
-    );
-});
-    
-
-    // 3. 상단바 스크롤
-    const header = document.querySelector('.header-nav');
-    function checkScroll() {
-        header.classList.toggle('scrolled', window.scrollY > 50);
-    }
-    window.addEventListener('scroll', checkScroll);
-    checkScroll();
-
-    // 4. 컨택트 버튼 로직
-    let isBtnFixed = false;
-    window.addEventListener('scroll', function() {
-        const btnWrapper = document.querySelector('.hero-right-wrapper');
-        const footer = document.querySelector('.site-footer');
-        
-        if (window.scrollY > 900) {
-            if (!isBtnFixed) {
-                btnWrapper.classList.remove('scrolled-out');
-                btnWrapper.classList.add('scrolled-fixed');
-                isBtnFixed = true;
-            }
-        } else {
-            if (isBtnFixed) {
-                btnWrapper.classList.remove('scrolled-fixed');
-                btnWrapper.classList.add('scrolled-out');
-                isBtnFixed = false;
-                setTimeout(() => {
-                    if (window.scrollY <= 1000) btnWrapper.classList.remove('scrolled-out');
-                }, 50);
-            }
-        }
-
-        if (footer && btnWrapper.classList.contains('scrolled-fixed')) {
-            const overlap = window.innerHeight - footer.getBoundingClientRect().top;
-            btnWrapper.style.marginBottom = overlap > 0 ? `${overlap}px` : '0px';
-        } else {
-            btnWrapper.style.marginBottom = '0px';
-        }
-    });
-
-    // 5. 모바일 메뉴
-    const mobileBtn = document.querySelector(".mobile-menu-btn");
-    const closeBtn = document.querySelector(".menu-close-btn");
-    const closeZone = document.querySelector(".mobile-close-zone");
-    const menuBox = document.querySelector(".menu-box");
-
-    if (mobileBtn && menuBox) {
-        mobileBtn.addEventListener("click", () => {
-            menuBox.classList.add("active");
-            history.pushState({ menuOpen: true }, "", "#menu");
-        });
-    }
-
-    const closeMenu = () => {
-        if (menuBox && menuBox.classList.contains("active")) {
-            menuBox.classList.remove("active");
-            if (window.location.hash === "#menu") history.back();
-        }
-    };
-
-    if (closeBtn) closeBtn.addEventListener("click", closeMenu);
-    if (closeZone) closeZone.addEventListener("click", closeMenu);
-    window.addEventListener("popstate", () => {
-        if (menuBox && menuBox.classList.contains("active")) menuBox.classList.remove("active");
-    });
-});
-</script>
-
-<script>
-const heroCopy = document.querySelector('.hero-copy');
-const introBox = document.querySelector('.intro-box .container');
-
-if (window.innerWidth <= 768) {
-    introBox.prepend(heroCopy);
-}
-</script>
+    <script src="script.js"></script>
 
 </body>
 
