@@ -829,6 +829,7 @@ min-height: clamp(100px, 90vw, 900px);
 
 .category-buttons a {
     text-decoration: none; font-size: clamp(14px, 2vw, 18px); font-weight: bold; padding: clamp(5px, 1vw, 11px) clamp(8px, 1.6vw, 14px); border-radius: 30px; transition: all 0.3s ease;
+    line-height: 1.0;
 }
 .btn-active {
     background-color: #ffffff; color: #000000; border: 2px solid #ffffff;
@@ -965,17 +966,23 @@ min-height: clamp(100px, 90vw, 900px);
     height: 100%;
 }
 
-/* 2. 스크롤 껍데기 영역 (사진 위에 스크롤 얹기 & 모서리 튀어나옴 방지) */
 .design-special-grid .scroll-box-container {
     flex: 1 1 0px !important; 
     min-height: 0 !important; 
     width: 100%;
     overflow-y: auto !important;
-    overflow-y: overlay !important; /* 💡 사진을 밀어내지 않고 위에 스크롤이 얹어짐 */
     overflow-x: hidden;
     border-radius: var(--main-radius);
     background-color: transparent !important; /* 💡 스크롤 트랙 배경을 투명하게 */
-    webkit-mask-image: -webkit-radial-gradient(white, black); /* 💡 둥근 모서리 밖으로 스크롤 삐져나옴 완벽 절단 */
+    -webkit-mask-image: -webkit-radial-gradient(white, black); /* 💡 둥근 모서리 밖으로 스크롤 삐져나옴 완벽 절단 */
+    position: relative;
+
+    /* 스크롤바 자체를 숨김 (기능은 유지) */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* 구형 Edge/IE */
+}
+.design-special-grid .scroll-box-container::-webkit-scrollbar {
+    display: none;                /* Chrome, Safari */
 }
 
 /* 3. 안쪽 긴 사진 */
@@ -1147,7 +1154,8 @@ min-height: clamp(100px, 90vw, 900px);
 
 .details-note {
     color: rgba(255,255,255,0.8);
-    font-size: clamp(13px, 1.5vw, 18px)
+    font-size: clamp(13px, 1.5vw, 18px);
+    margin-top: 1px;
 }
 
 /* 개인정보 수집 동의 */
@@ -1172,13 +1180,14 @@ min-height: clamp(100px, 90vw, 900px);
     line-height: 1.5;
 }
 
-.privacy-checkbox-label {
+.privacy-group .privacy-checkbox-label {
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
     color: #ffffff;
     font-size: clamp(13px, 1.2vw, 15px);
+    
 }
 
 .privacy-checkbox-label input[type="checkbox"] {
@@ -1187,6 +1196,7 @@ min-height: clamp(100px, 90vw, 900px);
     flex-shrink: 0;
     accent-color: #ffffff;
     cursor: pointer;
+    margin: 0;
 }
 
 .contact-page {
@@ -1622,4 +1632,36 @@ mix-blend-mode: difference;*/
         background-color: #ffffff;
     }
 
+}
+
+/* 스크롤 유도 화살표 */
+.scroll-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    animation: scrollHintPulse 1.6s ease-in-out infinite;
+    transition: opacity 0.5s ease;
+    z-index: 2;
+}
+.scroll-hint svg {
+    width: 28px;
+    height: 28px;
+}
+.scroll-hint.hidden {
+    opacity: 0 !important;
+    animation: none;
+}
+@keyframes scrollHintPulse {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
 }

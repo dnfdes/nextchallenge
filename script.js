@@ -145,3 +145,14 @@ window.addEventListener("load", () => {
         }, 100);
     }
 });
+
+
+// 홈페이지 제작 박스 - 스크롤하거나 일정 시간 지나면 유도 화살표 숨김
+const designScrollBox = document.getElementById('design-scroll-box');
+const designScrollHint = document.getElementById('design-scroll-hint');
+if (designScrollBox && designScrollHint) {
+    const hideHint = () => designScrollHint.classList.add('hidden');
+
+    designScrollBox.addEventListener('scroll', hideHint, { once: true });
+    setTimeout(hideHint, 3000); // 3초 뒤 자동으로 사라짐
+}
