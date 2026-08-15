@@ -147,12 +147,11 @@ window.addEventListener("load", () => {
 });
 
 
-// 홈페이지 제작 박스 - 스크롤하거나 일정 시간 지나면 유도 화살표 숨김
+// 홈페이지 제작 박스 - 스크롤하기 전까지 유도 화살표 유지, 스크롤하면 서서히 사라짐
 const designScrollBox = document.getElementById('design-scroll-box');
 const designScrollHint = document.getElementById('design-scroll-hint');
 if (designScrollBox && designScrollHint) {
-    const hideHint = () => designScrollHint.classList.add('hidden');
-
-    designScrollBox.addEventListener('scroll', hideHint, { once: true });
-    setTimeout(hideHint, 3000); // 3초 뒤 자동으로 사라짐
+    designScrollBox.addEventListener('scroll', () => {
+        designScrollHint.classList.add('hidden');
+    }, { once: true });
 }

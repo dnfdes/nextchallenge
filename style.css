@@ -1221,7 +1221,7 @@ min-height: clamp(100px, 90vw, 900px);
 .contact-bg-image {
     position: absolute;
     right: 100px;
-    bottom: 0;
+    bottom: -120px;
 
     width: 1200px;
 
@@ -1569,6 +1569,9 @@ mix-blend-mode: difference;*/
     .menu-content-panel {
         width: 30%;
     }
+        .mobile-close-zone {
+        width: 70%;
+    }
 
         .menu-box {
         width: calc(100% * 1.429);
@@ -1640,28 +1643,36 @@ mix-blend-mode: difference;*/
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 64px;
-    height: 64px;
+    width: 40px;
+    height: 60px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 50%;
     pointer-events: none;
     opacity: 1;
-    animation: scrollHintPulse 1.6s ease-in-out infinite;
-    transition: opacity 0.5s ease;
+    transition: opacity 1s ease;
     z-index: 2;
-}
-.scroll-hint svg {
-    width: 28px;
-    height: 28px;
 }
 .scroll-hint.hidden {
     opacity: 0 !important;
-    animation: none;
 }
-@keyframes scrollHintPulse {
-    0%, 100% { opacity: 0.35; }
-    50% { opacity: 1; }
+.scroll-hint .chevron {
+    width: 26px;
+    height: 26px;
+    margin-top: -10px;
+    stroke: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    opacity: 0;
+    animation: chevronFlow 1.6s ease-in-out infinite;
+}
+.scroll-hint .chevron-1 { animation-delay: 0s; }
+.scroll-hint .chevron-2 { animation-delay: 0.2s; }
+.scroll-hint .chevron-3 { animation-delay: 0.4s; }
+
+@keyframes chevronFlow {
+    0%   { opacity: 0; transform: translateY(-6px); }
+    30%  { opacity: 1; transform: translateY(0); }
+    60%  { opacity: 1; transform: translateY(4px); }
+    100% { opacity: 0; transform: translateY(10px); }
 }
