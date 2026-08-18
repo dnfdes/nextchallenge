@@ -129,7 +129,7 @@ body {
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
-        min-height: 1200px;
+        min-height: clamp(864px, calc(528px + 35vw), 1200px);
 
         z-index: 1;
 }
@@ -160,14 +160,13 @@ z-index: 1;
 
 .front-content-group {
     position: absolute;
-    left: -100px;
+    left: clamp(-500px, calc(-100px - 0.15 * (100vw - 1920px)), -100px);
     top: clamp(-80px, -1.6vw, 100px);
     z-index: 1;
 
-    width: clamp(
-        1700px,   /* portrait 직전 최소 */
-        130vw,   /* 화면이 줄면 자연스럽게 감소 */
-        2200px   /* 큰 모니터 최대 */
+    width: max(
+        1500px,    /* portrait 직전 최소 (확대 시 여기서 고정) */
+        114.6vw    /* 1920px 기준 2200px와 동일 비율, 상한 없이 계속 비례 확대 */
     );
 
     transform-origin: left top;
@@ -182,8 +181,8 @@ z-index: 1;
 
 .hero-copy {
     position: absolute;
-    right: 8%;
-    top: 28%;
+    right: clamp(67.2px, calc(9vw - 19.2px), 153.6px);
+    top: clamp(302.4px, calc(268.8px + 3.5vw), 336px);
     z-index: 20;
 
 
@@ -192,17 +191,6 @@ z-index: 1;
 
 
 @media (max-width: 1150px) {
-    .front-content-group {
-        left: -10%;
-        top: 0px;
-        width: clamp(500px, 150vw, 1500px);
-
-    }
-
-        .hero-gradient {
-min-height: clamp(100px, 90vw, 900px);
-    }
-
     .hero-gradient::after {
  height: clamp(100px, 38vw, 400px);
 }
@@ -213,7 +201,7 @@ min-height: clamp(100px, 90vw, 900px);
 .hero-copy-title {
     margin: 0;
 
-    font-size: 40px;
+    font-size: clamp(28.8px, calc(1.1667vw + 17.6px), 40px);
     font-weight: 700;
     line-height: 1.4;
 }
@@ -230,16 +218,50 @@ min-height: clamp(100px, 90vw, 900px);
 
 .hero-gradient .hero-right-wrapper {
     position: absolute;
-    top: 44%;
-    right: 7.5%;
+    top: clamp(432px, calc(336px + 10vw), 528px);
+    right: clamp(67.2px, calc(8vw - 9.6px), 144px);
 }
 
 
 .hero-right-wrapper {
     position: absolute;
-    top: 44%;
-    right: 7.5%;
+    top: clamp(432px, calc(336px + 10vw), 528px);
+    right: clamp(67.2px, calc(8vw - 9.6px), 144px);
     z-index: 100;
+}
+
+/* =========================================
+   [PC 전용] 브라우저 화면 배율(Zoom) 대응
+   - 기존 clamp()의 px 상/하한이 요소마다 서로 다른 확대율에서
+     제각각 값이 멈춰버려("고정") 이미지/텍스트/버튼이 어긋나 보이는
+     현상(휙휙 튀는 현상)의 원인이었습니다.
+   - 1151px 이상(PC/데스크톱 폭)에서는 px 상/하한 없이 vw 비율에만
+     비례해 계속 매끄럽게 커지고 작아지도록 해서, 배율을 올리든 내리든
+     같은 자리에서 비슷한 화면 비율을 유지한 채 확대/축소되게 합니다.
+   - 1150px 이하(태블릿 세로/모바일 가로 등)는 기존 clamp 값 그대로
+     사용되므로 모바일 레이아웃에는 영향이 없습니다.
+========================================= */
+@media (min-width: 1151px) {
+    .hero-gradient {
+        min-height: calc(528px + 35vw);
+    }
+
+    .front-content-group {
+        left: calc(-100px - 0.15 * (100vw - 1920px));
+        top: -1.6vw;
+        width: 114.6vw;
+    }
+
+    .hero-copy {
+        right: calc(9vw - 19.2px);
+        top: calc(268.8px + 3.5vw);
+    }
+
+    .hero-gradient .hero-right-wrapper,
+    .hero-right-wrapper {
+        top: calc(336px + 10vw);
+        right: calc(8vw - 9.6px);
+    }
 }
 
 
@@ -1282,8 +1304,8 @@ min-height: clamp(100px, 90vw, 900px);
    [반응형 최적화] 노트북 & 모바일 통합 구역
 ========================================= */
 
-/* 1. 데스크톱 우선 공통 제어 (768px 이상에서 모바일 요소 숨김) */
-@media (min-width: 1500px) {
+/* 1. 데스크톱 우선 공통 제어 (1501px 이상에서 모바일 요소 숨김) */
+@media (min-width: 1501px) {
     .mobile-menu-btn, .mobile-close-zone, .menu-close-btn { 
         display: none !important; 
     }
@@ -1322,30 +1344,11 @@ html, body {
     }
 
     .hero-copy {
-        top: 35%;
-        right: 7%;
-
-        /* 필요하면 */
-        transform: translateY(-50%);
 color: #ffffff;
         }
 
-            .hero-copy-title {
-        font-size: clamp(17px, 3.0vw, 30px);
-    }
-
-    .hero-copy-body p {
-        font-size: clamp(12px, 2vw, 30px);
-    }
-
     .footer-container {
     padding: clamp(24px, 4vw, 40px) 20px;
-    }
-
-
-    .hero-gradient .hero-right-wrapper {
-        top: 50%;
-        right: 7%;
     }
 
     /* [히어로 섹션] 세로 정렬 및 배경 최적화 */
@@ -1561,7 +1564,7 @@ mix-blend-mode: difference;*/
 
 }
 
-@media (max-width: 1500px) and (orientation: landscape) {
+@media (max-width: 1500px) and (orientation: landscape) and (max-height: 500px) {
     body {
         zoom: 0.70; /* 전체를 85%로 축소, 원하는 값으로 조절 */
     }
@@ -1595,6 +1598,10 @@ mix-blend-mode: difference;*/
     }
 
     .front-content-group {
+        /* 💡 PC 확대/축소 대응용 min-width:1151px 규칙과 이 구간(~1151~1500px)이
+           겹치므로, 모바일 가로모드 레이아웃이 바뀌지 않도록 기존 고정값을 되살립니다 */
+        left: -100px;
+        width: 1500px;
         transform: scale(1.20);
         transform-origin: left top;
     }
